@@ -33,9 +33,12 @@ def main():
     for i in range(0,count):
         binary = format(i,'b').zfill(4)
         print(binary)
+        menu = ""
         for j in range(0,4):
-            print(list(list(attributes.items())[j])[1][int(binary[j])])
-
+            menu = menu + list(list(attributes.items())[j])[1][int(binary[j])]
+            if j < 3:
+                menu = menu + ' '
+        print("menu: %s" % menu)
 
 if __name__ == "__main__":
     main()
