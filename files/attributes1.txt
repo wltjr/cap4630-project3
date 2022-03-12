@@ -1,4 +1,4 @@
-appetizer: soup, salad
+appetizer: salad, soup
 entree: beef, fish
 drink: beer, wine
 dissert: cake, ice-cream
