@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import re
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog as fd
@@ -9,6 +10,12 @@ class Attributes:
     """
     Attributes class represents an attribute with binary options
     """
+
+    def addAttribute(self, attribute, option1, option2):
+        self.count += 1
+        self.attributes[option1] = (option1, option2)
+        self.attr.insert(parent='',index='end',iid=self.count-1,text='',
+                         values=(self.count, attribute, option1, option2))
 
     def inputAttribute(self):
         """
@@ -26,16 +33,30 @@ class Attributes:
             mb.showerror("Error", "Option 2 value is required")
             return
 
-        self.count += 1
-        self.attr.insert(parent='',index='end',iid=self.count-1,text='',
-                         values=(self.count,
-                                 self.attribute_entry.get(),
-                                 self.option1_entry.get(),
-                                 self.option2_entry.get()))
+        self.addAttribute(self.attribute_entry.get(),
+                          self.option1_entry.get(),
+                          self.option2_entry.get())
 
         self.attribute_entry.delete(0,END)
         self.option1_entry.delete(0,END)
         self.option2_entry.delete(0,END)
+
+
+    def openFileCallback(self):
+        filename = fd.askopenfilename()
+
+        try:
+            file = open(filename, "r")
+        except IOError:
+            print ("The file %s was not found, aborting." % filename)
+            exit()
+
+        for line in file:
+            if line[0] == '\n' or line[0] == '#':
+                continue
+            values = re.split(r'[:,]', line[:-1])
+            self.addAttribute(values[0], values[1], values[2].lstrip())
+
 
     def __init__(self, root):
         """
@@ -112,3 +133,6 @@ class Attributes:
                               text = "Add Attribute",
                               command = self.inputAttribute)
         input_button.pack()
+
+        open_file = Button(root, text='Open File', command=self.openFileCallback)
+        open_file.pack()
