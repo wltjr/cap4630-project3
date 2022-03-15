@@ -83,10 +83,10 @@ class Attributes:
         attr_scroll = Scrollbar(attr_frame,orient='horizontal')
         attr_scroll.pack(side= BOTTOM,fill=X)
 
-        attr = ttk.Treeview(attr_frame,
+        attr = ttk.Treeview(attr_frame, height=5,
                             yscrollcommand=attr_scroll.set,
                             xscrollcommand =attr_scroll.set)
-        attr.pack()
+        attr.pack(fill='x')
 
         attr_scroll.config(command=attr.yview)
         attr_scroll.config(command=attr.xview)
