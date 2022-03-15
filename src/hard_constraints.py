@@ -23,13 +23,18 @@ class HardConstraints:
         hc_frame = Frame(root)
         hc_frame.pack()
 
-        hc_scroll = Scrollbar(hc_frame)
+        Label(hc_frame, text="Hard Constraints").pack()
+
+        hc_table_frame = Frame(hc_frame)
+        hc_table_frame.pack()
+
+        hc_scroll = Scrollbar(hc_table_frame)
         hc_scroll.pack(side=RIGHT, fill=Y)
 
-        hc_scroll = Scrollbar(hc_frame,orient='horizontal')
+        hc_scroll = Scrollbar(hc_table_frame,orient='horizontal')
         hc_scroll.pack(side= BOTTOM,fill=X)
 
-        hc = ttk.Treeview(hc_frame, height=5,
+        hc = ttk.Treeview(hc_table_frame, height=5,
                           yscrollcommand=hc_scroll.set,
                           xscrollcommand =hc_scroll.set)
         hc.pack(fill='x')
@@ -48,7 +53,7 @@ class HardConstraints:
         hc.heading("number",text="Const #",anchor=CENTER)
         hc.heading("constraint",text="Constraint",anchor=CENTER)
 
-        input_frame = Frame(root)
+        input_frame = Frame(hc_frame)
         input_frame.pack()
 
         self.hc = hc
@@ -58,14 +63,13 @@ class HardConstraints:
         self.constraint_entry = Entry(input_frame)
         self.constraint_entry.grid(row=0,column=1)
 
-        input_button = Button(root,
+        input_button = Button(hc_frame,
                               text = "Add Constraint",
                               command = self.getInput)
-        input_button.pack()
+        input_button.pack(side=LEFT, padx=5, pady=5)
 
-        open_file = Button(root, text='Open File', command=self.openFileCallback)
-#        open_file.pack(side=LEFT, padx=5, pady=5)
-        open_file.pack()
+        open_file = Button(hc_frame, text='Open File', command=self.openFileCallback)
+        open_file.pack(side=LEFT, padx=5, pady=5)
 
     def add(self, constraint):
         self.count += 1
