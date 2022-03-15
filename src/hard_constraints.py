@@ -29,10 +29,10 @@ class HardConstraints:
         hc_scroll = Scrollbar(hc_frame,orient='horizontal')
         hc_scroll.pack(side= BOTTOM,fill=X)
 
-        hc = ttk.Treeview(hc_frame,
+        hc = ttk.Treeview(hc_frame, height=5,
                           yscrollcommand=hc_scroll.set,
                           xscrollcommand =hc_scroll.set)
-        hc.pack()
+        hc.pack(fill='x')
 
         hc_scroll.config(command=hc.yview)
         hc_scroll.config(command=hc.xview)
