@@ -67,23 +67,22 @@ class Attributes:
         self.count = 0
         self.attributes = {}
 
-        attr_label = Label(root,
-                           justify=LEFT,
-                           padx = 10,
-                           text="Binary Attributes")
-        attr_label.pack()
-
         # Attribute Frame and Scrollbars
         attr_frame = Frame(root)
         attr_frame.pack()
+        
+        Label(attr_frame, text="Binary Attributes").pack()
 
-        attr_scroll = Scrollbar(attr_frame)
+        attr_table_frame = Frame(attr_frame)
+        attr_table_frame.pack()
+
+        attr_scroll = Scrollbar(attr_table_frame)
         attr_scroll.pack(side=RIGHT, fill=Y)
 
-        attr_scroll = Scrollbar(attr_frame,orient='horizontal')
+        attr_scroll = Scrollbar(attr_table_frame,orient='horizontal')
         attr_scroll.pack(side= BOTTOM,fill=X)
 
-        attr = ttk.Treeview(attr_frame, height=5,
+        attr = ttk.Treeview(attr_table_frame, height=5,
                             yscrollcommand=attr_scroll.set,
                             xscrollcommand =attr_scroll.set)
         attr.pack(fill='x')
@@ -108,7 +107,7 @@ class Attributes:
 
         self.attr = attr
 
-        input_frame = Frame(root)
+        input_frame = Frame(attr_frame)
         input_frame.pack()
 
         attribute = Label(input_frame,text="Attribute")
@@ -129,10 +128,10 @@ class Attributes:
         self.option2_entry = Entry(input_frame)
         self.option2_entry.grid(row=1,column=2)
 
-        input_button = Button(root,
+        input_button = Button(attr_frame,
                               text = "Add Attribute",
                               command = self.inputAttribute)
-        input_button.pack()
+        input_button.pack(side=LEFT, padx=5, pady=5)
 
-        open_file = Button(root, text='Open File', command=self.openFileCallback)
-        open_file.pack()
+        open_file = Button(attr_frame, text='Open File', command=self.openFileCallback)
+        open_file.pack(side=LEFT, padx=5, pady=5)
