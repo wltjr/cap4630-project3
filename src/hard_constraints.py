@@ -34,7 +34,7 @@ class HardConstraints:
         hc_scroll = Scrollbar(hc_table_frame,orient='horizontal')
         hc_scroll.pack(side= BOTTOM,fill=X)
 
-        hc = ttk.Treeview(hc_table_frame, height=5,
+        hc = ttk.Treeview(hc_table_frame, height=7,
                           yscrollcommand=hc_scroll.set,
                           xscrollcommand =hc_scroll.set)
         hc.pack(fill='x')
@@ -45,8 +45,8 @@ class HardConstraints:
         # Hard Constraints Columns
         hc['columns']= ('number', 'constraint')
         hc.column("#0", width=0,  stretch=NO)
-        hc.column("number",anchor=CENTER, width=80)
-        hc.column("constraint",anchor=CENTER, width=240)
+        hc.column("number",anchor=CENTER, width=40)
+        hc.column("constraint",anchor=CENTER, width=390)
 
         # Hard Contraints Headings
         hc.heading("#0",text="",anchor=CENTER)
