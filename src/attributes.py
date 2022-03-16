@@ -82,7 +82,7 @@ class Attributes:
         attr_scroll = Scrollbar(attr_table_frame,orient='horizontal')
         attr_scroll.pack(side= BOTTOM,fill=X)
 
-        attr = ttk.Treeview(attr_table_frame, height=5,
+        attr = ttk.Treeview(attr_table_frame, height=7,
                             yscrollcommand=attr_scroll.set,
                             xscrollcommand =attr_scroll.set)
         attr.pack(fill='x')
@@ -94,9 +94,9 @@ class Attributes:
         attr['columns']= ('number', 'attribute','option_1', 'option_2')
         attr.column("#0", width=0,  stretch=NO)
         attr.column("number",anchor=CENTER, width=40)
-        attr.column("attribute",anchor=CENTER, width=80)
-        attr.column("option_1",anchor=CENTER, width=80)
-        attr.column("option_2",anchor=CENTER, width=80)
+        attr.column("attribute",anchor=CENTER, width=130)
+        attr.column("option_1",anchor=CENTER, width=130)
+        attr.column("option_2",anchor=CENTER, width=130)
 
         # Atribute Headings
         attr.heading("#0",text="",anchor=CENTER)
