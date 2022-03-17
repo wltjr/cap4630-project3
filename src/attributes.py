@@ -13,7 +13,7 @@ class Attributes:
 
     def addAttribute(self, attribute, option1, option2):
         self.count += 1
-        self.attributes[option1] = (option1, option2)
+        self.attributes[attribute] = (option1, option2)
         self.attr.insert(parent='',index='end',iid=self.count-1,text='',
                          values=(self.count, attribute, option1, option2))
 
