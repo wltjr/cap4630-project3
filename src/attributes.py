@@ -55,7 +55,7 @@ class Attributes:
             if line[0] == '\n' or line[0] == '#':
                 continue
             values = re.split(r'[:,]', line[:-1])
-            self.addAttribute(values[0], values[1], values[2].lstrip())
+            self.addAttribute(values[0], values[1].lstrip(), values[2].lstrip())
 
 
     def __init__(self, root):
