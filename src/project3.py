@@ -33,15 +33,6 @@ class ui:
         clause.append(newstring)
         return clause
 
-
-    def printAttributes(self):
-        clauses = []
-        # this would wrap another function passing attributes as arg
-        for a in self.constraints.constraints:
-            for clause in self.getClause(a):
-                clauses.append(clause)
-        print(clauses)
-
     def run(self):
         root = Tk()
         root.title('Project 3')
@@ -65,10 +56,6 @@ class ui:
         quit = Button(root, text='Quit', command=root.quit)
         quit.pack(side=LEFT, padx=5, pady=5)
 
-
-        # print button
-        print = Button(root, text='Print Attributes', command=self.printAttributes)
-        print.pack(side=LEFT, padx=5, pady=5)
         root.mainloop()
 
         # data structures from classes
