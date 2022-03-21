@@ -38,19 +38,19 @@ class Preferences:
         pen_table_frame = Frame(pen_frame)
         pen_table_frame.pack()
 
-        pen_scroll = Scrollbar(pen_table_frame)
-        pen_scroll.pack(side=RIGHT, fill=Y)
+        pen_scroll_y = Scrollbar(pen_table_frame)
+        pen_scroll_y.pack(side=RIGHT, fill=Y)
 
-        pen_scroll = Scrollbar(pen_table_frame,orient='horizontal')
-        pen_scroll.pack(side=BOTTOM, fill=X)
+        pen_scroll_x = Scrollbar(pen_table_frame,orient='horizontal')
+        pen_scroll_x.pack(side=BOTTOM, fill=X)
 
         pen = ttk.Treeview(pen_table_frame, height=5,
-                           yscrollcommand=pen_scroll.set,
-                           xscrollcommand=pen_scroll.set,)
+                           yscrollcommand=pen_scroll_y.set,
+                           xscrollcommand=pen_scroll_x.set,)
         pen.pack(fill='x')
 
-        pen_scroll.config(command=pen.yview)
-        pen_scroll.config(command=pen.xview)
+        pen_scroll_y.config(command=pen.yview)
+        pen_scroll_x.config(command=pen.xview)
 
         # Penality Columns
         pen['columns']= ('number', 'reference', 'penalty')
@@ -76,19 +76,19 @@ class Preferences:
         poss_table_frame = Frame(poss_frame)
         poss_table_frame.pack()
 
-        poss_scroll = Scrollbar(poss_table_frame)
-        poss_scroll.pack(side=RIGHT, fill=Y)
+        poss_scroll_y = Scrollbar(poss_table_frame)
+        poss_scroll_y.pack(side=RIGHT, fill=Y)
 
-        poss_scroll = Scrollbar(poss_table_frame,orient='horizontal')
-        poss_scroll.pack(side=BOTTOM, fill=X)
+        poss_scroll_x = Scrollbar(poss_table_frame,orient='horizontal')
+        poss_scroll_x.pack(side=BOTTOM, fill=X)
 
         poss = ttk.Treeview(poss_table_frame, height=5,
-                            yscrollcommand=poss_scroll.set,
-                            xscrollcommand=poss_scroll.set,)
+                            yscrollcommand=poss_scroll_y.set,
+                            xscrollcommand=poss_scroll_x.set,)
         poss.pack(fill='x')
 
-        poss_scroll.config(command=poss.yview)
-        poss_scroll.config(command=poss.xview)
+        poss_scroll_y.config(command=poss.yview)
+        poss_scroll_x.config(command=poss.xview)
 
         # Possibilistic Columns
         poss['columns']= ('number', 'reference', 'tolerance')
@@ -114,19 +114,19 @@ class Preferences:
         qual_table_frame = Frame(qual_frame)
         qual_table_frame.pack()
 
-        qual_scroll = Scrollbar(qual_table_frame)
-        qual_scroll.pack(side=RIGHT, fill=Y)
+        qual_scroll_y = Scrollbar(qual_table_frame)
+        qual_scroll_y.pack(side=RIGHT, fill=Y)
 
-        qual_scroll = Scrollbar(qual_table_frame,orient='horizontal')
-        qual_scroll.pack(side=BOTTOM, fill=X)
+        qual_scroll_x = Scrollbar(qual_table_frame,orient='horizontal')
+        qual_scroll_x.pack(side=BOTTOM, fill=X)
 
         qual = ttk.Treeview(qual_table_frame, height=5,
-                            yscrollcommand=qual_scroll.set,
-                            xscrollcommand=qual_scroll.set,)
+                            yscrollcommand=qual_scroll_y.set,
+                            xscrollcommand=qual_scroll_x.set,)
         qual.pack(fill='x')
 
-        qual_scroll.config(command=qual.yview)
-        qual_scroll.config(command=qual.xview)
+        qual_scroll_y.config(command=qual.yview)
+        qual_scroll_x.config(command=qual.xview)
 
         # Qualitative Columns
         qual['columns']= ('number', 'reference')
