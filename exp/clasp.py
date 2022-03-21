@@ -38,14 +38,15 @@ def stdoutParse(process):
 
     :param process a process to parse stdout from
     """
+    solution = []
     for line in process.stdout.readlines():
-        if line.startswith("c Answer:"):
-            solution = set()
+#        if line.startswith("c Answer:"):
+#           solution = set()
         if line[0] == 'v':
-            solution = set(map(int, line[2:-2].split()))
-            print(solution)
+            solution.append(list(map(int, line[2:-2].split())))
 #        else:
 #            print(line.rstrip())
+    return solution
 
 def solve(num, objs_num, clauses):
     """
@@ -66,10 +67,29 @@ def solve(num, objs_num, clauses):
         writeRule(process, c)
     process.stdin.close()
 
-    stdoutParse(process)
+    return stdoutParse(process)
 
 
+print("beer AND beer OR beef AND salad (not soup)")
 # beer AND beer OR beef AND salad (not soup)
 clauses = ["-3", "-2 -3", "-1"]
+print(clauses)
+print("solution(s)")
+print(solve(0, 4, clauses))
+print()
 
-solve(0,4, clauses)
+print("fish AND wine")
+# fish AND wine
+clauses = ["2","3"]
+print(clauses)
+print("solution(s)")
+print(solve(0, 4, clauses))
+print()
+
+print("fish OR wine")
+# fish AND wine
+clauses = ["2 3"]
+print(clauses)
+print("solution(s)")
+print(solve(0, 4, clauses))
+print()
