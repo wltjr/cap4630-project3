@@ -3,6 +3,7 @@
 from attributes import *
 from hard_constraints import *
 from preferences import *
+from tasks_display import *
 from tkinter import *
 
 global attr
@@ -52,9 +53,25 @@ class ui:
         table_frame.grid(row=0,column=1)
         frame.pack()
 
+        # existence button
+        existence = Button(root, text='Existence', command=None)
+        existence.pack(side=LEFT, padx=5, pady=5)
+
+        # exemplify button
+        exemplify = Button(root, text='Exemplify', command=None)
+        exemplify.pack(side=LEFT, padx=5, pady=5)
+
+        # optimize button
+        optimize = Button(root, text='Optimize', command=None)
+        optimize.pack(side=LEFT, padx=5, pady=5)
+
+        # omni-optimize button
+        omni_optimize = Button(root, text='Omni-optimize', command=None)
+        omni_optimize.pack(side=LEFT, padx=5, pady=5)
+
         # quit button
         quit = Button(root, text='Quit', command=root.quit)
-        quit.pack(side=LEFT, padx=5, pady=5)
+        quit.pack(side=RIGHT, padx=5, pady=5)
 
         root.mainloop()
 
