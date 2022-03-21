@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from attributes import *
+from clasp import *
 from hard_constraints import *
 from preferences import *
 from tasks_display import *
@@ -34,6 +35,18 @@ class ui:
         clause.append(newstring)
         return clause
 
+    def existence(self):
+        clauses = []
+        for constrant in self.constraints.constraints:
+            for clause in self.getClause(constrant):
+                clauses.append(clause)
+
+        clasp = Clasp()
+        solutions = clasp.solve(0, 4, clauses)
+
+        for solution in solutions:
+            self.tasks.add(solution)
+
     def run(self):
         root = Tk()
         root.title('Project 3')
@@ -51,10 +64,12 @@ class ui:
         table_frame.grid(row=0,column=0)
         self.preferences = Preferences(table_frame)
         table_frame.grid(row=0,column=1)
+        self.tasks = TasksDisplay(table_frame)
+        table_frame.grid(row=0,column=2)
         frame.pack()
 
         # existence button
-        existence = Button(root, text='Existence', command=None)
+        existence = Button(root, text='Existence', command=self.existence)
         existence.pack(side=LEFT, padx=5, pady=5)
 
         # exemplify button
