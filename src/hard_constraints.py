@@ -28,19 +28,19 @@ class HardConstraints:
         hc_table_frame = Frame(hc_frame)
         hc_table_frame.pack()
 
-        hc_scroll = Scrollbar(hc_table_frame)
-        hc_scroll.pack(side=RIGHT, fill=Y)
+        hc_scroll_y = Scrollbar(hc_table_frame)
+        hc_scroll_y.pack(side=RIGHT, fill=Y)
 
-        hc_scroll = Scrollbar(hc_table_frame,orient='horizontal')
-        hc_scroll.pack(side= BOTTOM,fill=X)
+        hc_scroll_x = Scrollbar(hc_table_frame,orient='horizontal')
+        hc_scroll_x.pack(side=BOTTOM, fill=X)
 
         hc = ttk.Treeview(hc_table_frame, height=7,
-                          yscrollcommand=hc_scroll.set,
-                          xscrollcommand =hc_scroll.set)
+                          yscrollcommand=hc_scroll_y.set,
+                          xscrollcommand=hc_scroll_x.set)
         hc.pack(fill='x')
 
-        hc_scroll.config(command=hc.yview)
-        hc_scroll.config(command=hc.xview)
+        hc_scroll_y.config(command=hc.yview)
+        hc_scroll_x.config(command=hc.xview)
 
         # Hard Constraints Columns
         hc['columns']= ('number', 'constraint')
