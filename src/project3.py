@@ -11,10 +11,36 @@ class ui:
         name = fd.askopenfilename()
         print(name)
 
+    def getClause(self, string):
+        clause = []
+        stringlist = string.split()
+        newstring = ""
+        negate = False
+        for i in stringlist:
+            if i == "AND":
+                clause.append(newstring)
+                newstring = ""
+            elif i == "OR":
+                newstring = newstring + " "
+            elif i == "NOT":
+                negate = True
+            else:
+                value = self.attributes.getKeyByValue(i)
+                if negate:
+                    value = -value
+                    negate = False
+                newstring = newstring + str(value)
+        clause.append(newstring)
+        return clause
+
+
     def printAttributes(self):
+        clauses = []
         # this would wrap another function passing attributes as arg
-        for a in self.attributes.attributes.items():
-            print(a)
+        for a in self.constraints.constraints:
+            for clause in self.getClause(a):
+                clauses.append(clause)
+        print(clauses)
 
     def run(self):
         root = Tk()
