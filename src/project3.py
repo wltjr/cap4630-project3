@@ -28,10 +28,10 @@ class ui:
         group_frame = Frame(table_frame)
         self.attributes = Attributes(group_frame)
         group_frame.pack(side=LEFT, padx=5, pady=5)
-        constraints = HardConstraints(group_frame)
+        self.constraints = HardConstraints(group_frame)
         group_frame.pack(side=LEFT, padx=5, pady=5)
         table_frame.grid(row=0,column=0)
-        preferences = Preferences(table_frame)
+        self.preferences = Preferences(table_frame)
         table_frame.grid(row=0,column=1)
         frame.pack()
 
