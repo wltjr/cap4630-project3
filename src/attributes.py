@@ -11,9 +11,28 @@ class Attributes:
     Attributes class represents an attribute with binary options
     """
 
+    def getKeyByValue(self, value):
+        """
+        Get attribute key by the value
+
+        :return the value of the key
+        """
+        for key, val in self.attributes.items():
+            if val == value:
+                return key
+
+    def getValueByKey(self, key):
+        """
+        Get attribute value by the key
+
+        :return the key of the value
+        """
+        return self.attributes[key]
+
     def addAttribute(self, attribute, option1, option2):
         self.count += 1
-        self.attributes[attribute] = (option1, option2)
+        self.attributes[self.count] = option1
+        self.attributes[-self.count] = option2
         self.attr.insert(parent='',index='end',iid=self.count-1,text='',
                          values=(self.count, attribute, option1, option2))
 
