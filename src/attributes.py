@@ -95,19 +95,19 @@ class Attributes:
         attr_table_frame = Frame(attr_frame)
         attr_table_frame.pack()
 
-        attr_scroll = Scrollbar(attr_table_frame)
-        attr_scroll.pack(side=RIGHT, fill=Y)
+        attr_scroll_y = Scrollbar(attr_table_frame)
+        attr_scroll_y.pack(side=RIGHT, fill=Y)
 
-        attr_scroll = Scrollbar(attr_table_frame,orient='horizontal')
-        attr_scroll.pack(side= BOTTOM,fill=X)
+        attr_scroll_x = Scrollbar(attr_table_frame,orient='horizontal')
+        attr_scroll_x.pack(side=BOTTOM, fill=X)
 
         attr = ttk.Treeview(attr_table_frame, height=7,
-                            yscrollcommand=attr_scroll.set,
-                            xscrollcommand =attr_scroll.set)
+                            yscrollcommand=attr_scroll_y.set,
+                            xscrollcommand=attr_scroll_x.set)
         attr.pack(fill='x')
 
-        attr_scroll.config(command=attr.yview)
-        attr_scroll.config(command=attr.xview)
+        attr_scroll_y.config(command=attr.yview)
+        attr_scroll_x.config(command=attr.xview)
 
         # Attribute Columns
         attr['columns']= ('number', 'attribute','option_1', 'option_2')
