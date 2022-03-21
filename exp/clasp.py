@@ -69,7 +69,6 @@ def solve(num, objs_num, clauses):
 
     return stdoutParse(process)
 
-
 print("beer AND beer OR beef AND salad (not soup)")
 # beer AND beer OR beef AND salad (not soup)
 clauses = ["-3", "-2 -3", "-1"]
@@ -92,4 +91,13 @@ clauses = ["2 3"]
 print(clauses)
 print("solution(s)")
 print(solve(0, 4, clauses))
+print()
+
+print("wine OR cake AND salad OR cake (not soup and ice cream)")
+# wine OR cake AND salad OR cake
+clauses = ["3 4", "-1 4"]
+print(clauses)
+print("solution(s)")
+solution = solve(0, 4, clauses)
+print(len(solution), solution)
 print()
