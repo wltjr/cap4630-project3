@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
+from table import Table
 from tkinter import *
-from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 
@@ -34,9 +34,9 @@ class HardConstraints:
         hc_scroll_x = Scrollbar(hc_table_frame,orient='horizontal')
         hc_scroll_x.pack(side=BOTTOM, fill=X)
 
-        hc = ttk.Treeview(hc_table_frame, height=7,
-                          yscrollcommand=hc_scroll_y.set,
-                          xscrollcommand=hc_scroll_x.set)
+        hc = Table(hc_table_frame, height=7,
+                   yscrollcommand=hc_scroll_y.set,
+                   xscrollcommand=hc_scroll_x.set)
         hc.pack(fill='x')
 
         hc_scroll_y.config(command=hc.yview)
@@ -99,6 +99,9 @@ class HardConstraints:
         except IOError:
             print ("The file %s was not found, aborting." % filename)
             exit()
+
+        self.count = 0
+        self.hc.clear()
 
         for line in file:
             if line[0] == '\n' or line[0] == '#':
