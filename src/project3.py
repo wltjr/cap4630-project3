@@ -7,7 +7,6 @@ from preferences import *
 from tasks_display import *
 from tkinter import *
 
-global attr
 class ui:
     def openFileCallback():
         name = fd.askopenfilename()
