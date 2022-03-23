@@ -4,6 +4,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
+from table import Table
 
 class TasksDisplay:
     """
@@ -34,9 +35,9 @@ class TasksDisplay:
         td_scroll_x = Scrollbar(td_table_frame,orient='horizontal')
         td_scroll_x.pack(side=BOTTOM,fill=X)
 
-        td = ttk.Treeview(td_table_frame, height=7,
-                          yscrollcommand=td_scroll_y.set,
-                          xscrollcommand =td_scroll_x.set)
+        td = Table(td_table_frame, height=7,
+                   yscrollcommand=td_scroll_y.set,
+                   xscrollcommand =td_scroll_x.set)
         td.pack(fill='x')
 
         td_scroll_y.config(command=td.yview)
@@ -63,4 +64,8 @@ class TasksDisplay:
         self.objects.append(object)
         self.td.insert(parent='',index='end',iid=self.count-1,text='',
                        values=(self.count, object))
+
+    def clearTable(self):
+        self.count = 0
+        self.td.clear()
 
