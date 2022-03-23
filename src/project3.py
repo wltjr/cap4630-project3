@@ -67,6 +67,18 @@ class ui:
 
         self.notebook.select(self.tab2)
 
+    def reset(self):
+        self.attributes.count = 0
+        self.attributes.attr.clear()
+        self.constraints.count = 0
+        self.constraints.hc.clear()
+        self.preferences.qual_count = 0
+        self.preferences.qual.clear()
+        self.preferences.poss_count = 0
+        self.preferences.poss.clear()
+        self.preferences.pen_count = 0
+        self.preferences.pen.clear()
+
     def run(self):
         root = Tk()
         root.title('Project 3')
@@ -116,6 +128,10 @@ class ui:
         # quit button
         quit = Button(root, text='Quit', command=root.quit)
         quit.pack(side=RIGHT, padx=5, pady=5)
+
+        # reset button
+        reset = Button(root, text='Reset', command=self.reset)
+        reset.pack(side=RIGHT, padx=5, pady=5)
 
         root.mainloop()
 
