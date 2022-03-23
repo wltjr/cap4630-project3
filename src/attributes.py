@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import re
+from table import Table
 from tkinter import *
-from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 
@@ -70,6 +70,9 @@ class Attributes:
             print ("The file %s was not found, aborting." % filename)
             exit()
 
+        self.count = 0
+        self.attr.clear()
+
         for line in file:
             if line[0] == '\n' or line[0] == '#':
                 continue
@@ -101,9 +104,9 @@ class Attributes:
         attr_scroll_x = Scrollbar(attr_table_frame,orient='horizontal')
         attr_scroll_x.pack(side=BOTTOM, fill=X)
 
-        attr = ttk.Treeview(attr_table_frame, height=7,
-                            yscrollcommand=attr_scroll_y.set,
-                            xscrollcommand=attr_scroll_x.set)
+        attr = Table(attr_table_frame, height=7,
+                     yscrollcommand=attr_scroll_y.set,
+                     xscrollcommand=attr_scroll_x.set)
         attr.pack(fill='x')
 
         attr_scroll_y.config(command=attr.yview)
