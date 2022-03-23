@@ -95,12 +95,6 @@ class ui:
 
         root.mainloop()
 
-        # data structures from classes
-    #    attributes.attributes
-    #    constraints.constraints
-    #    preferences.penalties
-    #    preferences.possibilistics
-    #    preferences.qualitatives
 
 if __name__ == '__main__':
     ui = ui()
