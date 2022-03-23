@@ -47,10 +47,11 @@ class TasksDisplay:
         td_scroll_x.config(command=td.xview)
 
         # Feasible Objects Columns
-        td['columns']= ('number', 'object')
+        td['columns']= ('number', 'clasp', 'object')
         td.column("#0", width=0,  stretch=NO)
         td.column("number",anchor=CENTER, width=40)
-        td.column("object",anchor=CENTER, width=390)
+        td.column("clasp",anchor=CENTER, width=80)
+        td.column("object",anchor=CENTER, width=310)
 
         # Feasible Objects Headings
         td.heading("#0",text="",anchor=CENTER)
@@ -60,11 +61,12 @@ class TasksDisplay:
 
         self.td = td
 
-    def add(self, object):
+    def add(self, clasp, object):
         self.count += 1
-        self.objects.append(object)
+        self.objects.append(clasp)
         self.td.insert(parent='',index='end',iid=self.count-1,text='',
-                       values=(self.count, object))
+                       values=(self.count, clasp, object))
+        self.td_label.config(text=str(self.count)+self.defaultFeasibleLabel[1:])
 
     def clearTable(self):
         self.td_label.config(text=self.defaultFeasibleLabel)
