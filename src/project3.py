@@ -59,7 +59,11 @@ class ui:
         clasp = Clasp()
         solutions = clasp.solve(0, attributeCount, clauses)
         for solution in solutions:
-            self.tasks.add(solution)
+            text = ""
+            for key in solution:
+                text += self.attributes.getValueByKey(key) + " "
+            text = text[:-1]
+            self.tasks.add(solution, text)
 
         self.notebook.select(self.tab2)
 
