@@ -42,6 +42,8 @@ class ui:
                          "Please load or enter attributes first")
             return
 
+        self.tasks.clearTable()
+
         clauses = []
         for constrant in self.constraints.constraints:
             for clause in self.getClause(constrant):
