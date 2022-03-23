@@ -54,9 +54,6 @@ class TasksDisplay:
         td.heading("number",text="Obj #",anchor=CENTER)
         td.heading("object",text="Object",anchor=CENTER)
 
-        input_frame = Frame(td_frame)
-        input_frame.pack()
-
         self.td = td
 
     def add(self, object):
