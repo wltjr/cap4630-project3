@@ -1,8 +1,8 @@
 0#!/usr/bin/python
 
 import re
+from table import Table
 from tkinter import *
-from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 
@@ -44,9 +44,9 @@ class Preferences:
         pen_scroll_x = Scrollbar(pen_table_frame,orient='horizontal')
         pen_scroll_x.pack(side=BOTTOM, fill=X)
 
-        pen = ttk.Treeview(pen_table_frame, height=5,
-                           yscrollcommand=pen_scroll_y.set,
-                           xscrollcommand=pen_scroll_x.set,)
+        pen = Table(pen_table_frame, height=5,
+                    yscrollcommand=pen_scroll_y.set,
+                    xscrollcommand=pen_scroll_x.set,)
         pen.pack(fill='x')
 
         pen_scroll_y.config(command=pen.yview)
@@ -82,9 +82,9 @@ class Preferences:
         poss_scroll_x = Scrollbar(poss_table_frame,orient='horizontal')
         poss_scroll_x.pack(side=BOTTOM, fill=X)
 
-        poss = ttk.Treeview(poss_table_frame, height=5,
-                            yscrollcommand=poss_scroll_y.set,
-                            xscrollcommand=poss_scroll_x.set,)
+        poss = Table(poss_table_frame, height=5,
+                    yscrollcommand=poss_scroll_y.set,
+                    xscrollcommand=poss_scroll_x.set,)
         poss.pack(fill='x')
 
         poss_scroll_y.config(command=poss.yview)
@@ -120,9 +120,9 @@ class Preferences:
         qual_scroll_x = Scrollbar(qual_table_frame,orient='horizontal')
         qual_scroll_x.pack(side=BOTTOM, fill=X)
 
-        qual = ttk.Treeview(qual_table_frame, height=5,
-                            yscrollcommand=qual_scroll_y.set,
-                            xscrollcommand=qual_scroll_x.set,)
+        qual = Table(qual_table_frame, height=5,
+                    yscrollcommand=qual_scroll_y.set,
+                    xscrollcommand=qual_scroll_x.set,)
         qual.pack(fill='x')
 
         qual_scroll_y.config(command=qual.yview)
@@ -208,6 +208,15 @@ class Preferences:
         except IOError:
             print ("The file %s was not found, aborting." % filename)
             exit()
+
+        self.qual_count = 0
+        self.qual.clear()
+
+        self.poss_count = 0
+        self.poss.clear()
+
+        self.pen_count = 0
+        self.pen.clear()
 
         for line in file:
             if line[0] == '\n' or line[0] == '#':
