@@ -6,6 +6,7 @@ from hard_constraints import *
 from preferences import *
 from tasks_display import *
 from tkinter import *
+from tkinter import messagebox as mb
 
 class ui:
     def openFileCallback():
@@ -35,14 +36,19 @@ class ui:
         return clause
 
     def existence(self):
+        attributeCount = self.attributes.count
+        if attributeCount == 0:
+            mb.showerror("Empty Attributes Error",
+                         "Please load or enter attributes first")
+            return
+
         clauses = []
         for constrant in self.constraints.constraints:
             for clause in self.getClause(constrant):
                 clauses.append(clause)
 
         clasp = Clasp()
-        solutions = clasp.solve(0, 4, clauses)
-
+        solutions = clasp.solve(0, attributeCount, clauses)
         for solution in solutions:
             self.tasks.add(solution)
 
