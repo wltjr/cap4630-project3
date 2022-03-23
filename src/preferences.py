@@ -1,12 +1,12 @@
 0#!/usr/bin/python
 
 import re
+from input_ui import InputUI
 from table import Table
 from tkinter import *
-from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 
-class Preferences:
+class Preferences(InputUI):
     """
     Preferences class represents user preferences for penalty logic,
     possibilistic logic, and qualitative choice logic
@@ -201,13 +201,10 @@ class Preferences:
 
 
     def openFileCallback(self):
-        filename = fd.askopenfilename()
+        file = super().openFile()
 
-        try:
-            file = open(filename, "r")
-        except IOError:
-            print ("The file %s was not found, aborting." % filename)
-            exit()
+        if file == None:
+            return
 
         self.qual_count = 0
         self.qual.clear()
