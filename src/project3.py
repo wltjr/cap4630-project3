@@ -40,11 +40,13 @@ class ui:
         if attributeCount == 0:
             mb.showerror("Empty Attributes Error",
                          "Please load or enter attributes")
+            self.notebook.select(self.tab1)
             return
 
         if self.constraints.count == 0:
             mb.showerror("Empty Contraints Error",
                          "Please load or enter contraints")
+            self.notebook.select(self.tab1)
             return
 
         self.tasks.clearTable()
@@ -58,6 +60,8 @@ class ui:
         solutions = clasp.solve(0, attributeCount, clauses)
         for solution in solutions:
             self.tasks.add(solution)
+
+        self.notebook.select(self.tab2)
 
     def run(self):
         root = Tk()
@@ -84,6 +88,10 @@ class ui:
         frame.pack()
 
         self.tasks = TasksDisplay(tab2)
+
+        self.notebook = notebook
+        self.tab1 = tab1
+        self.tab2 = tab2
 
         # existence button
         existence = Button(root, text='Existence', command=self.existence)
