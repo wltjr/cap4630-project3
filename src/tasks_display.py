@@ -11,6 +11,8 @@ class TasksDisplay:
     TaskDisplay class to display various tasks output, object table
     """
 
+    defaultFeasibleLabel = "0 Feasible Objects"
+
     def __init__(self, root):
         """
         Creates an initial GUI to display tasks output and instantiates the class
@@ -22,9 +24,10 @@ class TasksDisplay:
 
         # Task Display Frame and Scrollbars
         td_frame = Frame(root)
-        td_frame.pack()
+        td_frame.pack(side=LEFT, padx=5, pady=5)
 
-        self.td_label = Label(td_frame, text="Objects").pack()
+        self.td_label = Label(td_frame, text=self.defaultFeasibleLabel)
+        self.td_label.pack()
 
         td_table_frame = Frame(td_frame)
         td_table_frame.pack()
@@ -35,7 +38,7 @@ class TasksDisplay:
         td_scroll_x = Scrollbar(td_table_frame,orient='horizontal')
         td_scroll_x.pack(side=BOTTOM,fill=X)
 
-        td = Table(td_table_frame, height=7,
+        td = Table(td_table_frame, height=23,
                    yscrollcommand=td_scroll_y.set,
                    xscrollcommand =td_scroll_x.set)
         td.pack(fill='x')
@@ -52,6 +55,7 @@ class TasksDisplay:
         # Feasible Objects Headings
         td.heading("#0",text="",anchor=CENTER)
         td.heading("number",text="Obj #",anchor=CENTER)
+        td.heading("clasp",text="Clasp",anchor=CENTER)
         td.heading("object",text="Object",anchor=CENTER)
 
         self.td = td
@@ -63,6 +67,7 @@ class TasksDisplay:
                        values=(self.count, object))
 
     def clearTable(self):
+        self.td_label.config(text=self.defaultFeasibleLabel)
         self.count = 0
         self.td.clear()
 
