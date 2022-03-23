@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
 import re
+from input_ui import InputUI
 from table import Table
 from tkinter import *
-from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 
-class Attributes:
+class Attributes(InputUI):
     """
     Attributes class represents an attribute with binary options
     """
@@ -62,13 +62,10 @@ class Attributes:
 
 
     def openFileCallback(self):
-        filename = fd.askopenfilename()
+        file = super().openFile()
 
-        try:
-            file = open(filename, "r")
-        except IOError:
-            print ("The file %s was not found, aborting." % filename)
-            exit()
+        if file == None:
+            return
 
         self.count = 0
         self.attr.clear()
