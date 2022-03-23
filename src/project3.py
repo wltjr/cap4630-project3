@@ -56,22 +56,27 @@ class ui:
         root = Tk()
         root.title('Project 3')
 
+        notebook = ttk.Notebook(root)
+        
+        tab1 = ttk.Frame(notebook)
+        tab2 = ttk.Frame(notebook)
+
+        notebook.add(tab1, text="Input")
+        notebook.add(tab2, text="Output")
+        notebook.pack(expand = 1, fill ="both")
+
         # wrapper frames
-        frame = Frame(root)
-        table_frame = Frame(frame)
+        frame = Frame(tab1)
 
         # main UI, tables and forms
-        group_frame = Frame(table_frame)
+        group_frame = Frame(frame)
         self.attributes = Attributes(group_frame)
-        group_frame.pack(side=LEFT, padx=5, pady=5)
         self.constraints = HardConstraints(group_frame)
         group_frame.pack(side=LEFT, padx=5, pady=5)
-        table_frame.grid(row=0,column=0)
-        self.preferences = Preferences(table_frame)
-        table_frame.grid(row=0,column=1)
-        self.tasks = TasksDisplay(table_frame)
-        table_frame.grid(row=0,column=2)
+        self.preferences = Preferences(frame)
         frame.pack()
+
+        self.tasks = TasksDisplay(tab2)
 
         # existence button
         existence = Button(root, text='Existence', command=self.existence)
