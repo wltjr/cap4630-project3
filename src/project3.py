@@ -39,7 +39,12 @@ class ui:
         attributeCount = self.attributes.count
         if attributeCount == 0:
             mb.showerror("Empty Attributes Error",
-                         "Please load or enter attributes first")
+                         "Please load or enter attributes")
+            return
+
+        if self.constraints.count == 0:
+            mb.showerror("Empty Contraints Error",
+                         "Please load or enter contraints")
             return
 
         self.tasks.clearTable()
