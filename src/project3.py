@@ -4,6 +4,7 @@ from attributes import *
 from clasp import *
 from hard_constraints import *
 from preferences import *
+from preferences_display import *
 from tasks_display import *
 from tkinter import *
 from tkinter import messagebox as mb
@@ -99,11 +100,12 @@ class ui:
         group_frame = Frame(frame)
         self.attributes = Attributes(group_frame)
         self.constraints = HardConstraints(group_frame)
-        group_frame.pack(side=LEFT, padx=5, pady=5)
+        group_frame.pack(side=LEFT, padx=5)
         self.preferences = Preferences(frame)
         frame.pack()
 
         self.tasks = TasksDisplay(tab2)
+        self.prefDisplay = PreferencesDisplay(tab2)
 
         self.notebook = notebook
         self.tab1 = tab1
