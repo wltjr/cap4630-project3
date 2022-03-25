@@ -68,6 +68,11 @@ class ui:
 
         self.notebook.select(self.tab2)
 
+
+    def exemplify(self):
+        self.existence()
+
+
     def reset(self):
         self.attributes.count = 0
         self.attributes.attr.clear()
@@ -79,6 +84,7 @@ class ui:
         self.preferences.poss.clear()
         self.preferences.pen_count = 0
         self.preferences.pen.clear()
+
 
     def run(self):
         root = Tk()
@@ -116,7 +122,7 @@ class ui:
         existence.pack(side=LEFT, padx=5, pady=5)
 
         # exemplify button
-        exemplify = Button(root, text='Exemplify', command=None)
+        exemplify = Button(root, text='Exemplify', command=self.exemplify)
         exemplify.pack(side=LEFT, padx=5, pady=5)
 
         # optimize button
