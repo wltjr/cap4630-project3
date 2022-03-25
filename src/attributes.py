@@ -101,7 +101,7 @@ class Attributes(InputUI):
         attr_scroll_x = Scrollbar(attr_table_frame,orient='horizontal')
         attr_scroll_x.pack(side=BOTTOM, fill=X)
 
-        attr = Table(attr_table_frame, height=7,
+        attr = Table(attr_table_frame, height=8,
                      yscrollcommand=attr_scroll_y.set,
                      xscrollcommand=attr_scroll_x.set)
         attr.pack(fill='x')
