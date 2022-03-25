@@ -1,0 +1,6 @@
+NOT electric OR NOT manual
+NOT soft OR NOT truck
+NOT two OR NOT truck
+NOT manual OR NOT xm
+NOT electric OR NOT cloth
+NOT truck OR NOT electric
