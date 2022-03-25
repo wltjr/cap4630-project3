@@ -56,6 +56,7 @@ class ui:
         for constrant in self.constraints.constraints:
             for clause in self.getClause(constrant):
                 clauses.append(clause)
+        self.clauses = clauses
 
         clasp = Clasp()
         solutions = clasp.solve(0, attributeCount, clauses)
