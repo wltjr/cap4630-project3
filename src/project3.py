@@ -5,67 +5,21 @@ from clasp import *
 from hard_constraints import *
 from preferences import *
 from tasks_display import *
+from optimal_objs import *
 from tkinter import *
 from tkinter import messagebox as mb
 
+
 class ui:
+
     def openFileCallback():
         name = fd.askopenfilename()
         print(name)
 
-    def getClause(self, string):
-        clause = []
-        stringlist = string.split()
-        newstring = ""
-        negate = False
-        for i in stringlist:
-            if i == "AND":
-                clause.append(newstring)
-                newstring = ""
-            elif i == "OR":
-                newstring = newstring + " "
-            elif i == "NOT":
-                negate = True
-            else:
-                value = self.attributes.getKeyByValue(i)
-                if negate:
-                    value = -value
-                    negate = False
-                newstring = newstring + str(value)
-        clause.append(newstring)
-        return clause
-
     def existence(self):
-        attributeCount = self.attributes.count
-        if attributeCount == 0:
-            mb.showerror("Empty Attributes Error",
-                         "Please load or enter attributes")
-            self.notebook.select(self.tab1)
-            return
-
-        if self.constraints.count == 0:
-            mb.showerror("Empty Contraints Error",
-                         "Please load or enter contraints")
-            self.notebook.select(self.tab1)
-            return
-
-        self.tasks.clearTable()
-
-        clauses = []
-        for constrant in self.constraints.constraints:
-            for clause in self.getClause(constrant):
-                clauses.append(clause)
-
-        clasp = Clasp()
-        solutions = clasp.solve(0, attributeCount, clauses)
-        for solution in solutions:
-            text = ""
-            for key in solution:
-                text += self.attributes.getValueByKey(key) + " "
-            text = text[:-1]
-            self.tasks.add(solution, text)
-
-        self.notebook.select(self.tab2)
+        objects = Objects(self.tasks, self.notebook, self.tab1, self.tab2,
+                          self.attributes, self.constraints)
+        objects.existence()
 
     def reset(self):
         self.attributes.count = 0
@@ -84,13 +38,13 @@ class ui:
         root.title('Project 3')
 
         notebook = ttk.Notebook(root)
-        
+
         tab1 = ttk.Frame(notebook)
         tab2 = ttk.Frame(notebook)
 
         notebook.add(tab1, text="Input")
         notebook.add(tab2, text="Output")
-        notebook.pack(expand = 1, fill ="both")
+        notebook.pack(expand=1, fill="both")
 
         # wrapper frames
         frame = Frame(tab1)
