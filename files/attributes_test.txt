@@ -1,0 +1,8 @@
+doors: two, four
+engine: gas, electric
+drive: awd, twd
+interior: leather, cloth
+transmission: manual, auto
+top-style: hard, soft
+type: truck, car
+stereo: xm, fm/am
