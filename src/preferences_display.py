@@ -164,6 +164,15 @@ class PreferencesDisplay:
         self.qual = qual
 
 
+    def setHeaderColumnObjNames(self, object1, object2):
+        self.pen.heading("object1",text=object1)
+        self.pen.heading("object2",text=object2)
+        self.poss.heading("object1",text=object1)
+        self.poss.heading("object2",text=object2)
+        self.qual.heading("object1",text=object1)
+        self.qual.heading("object2",text=object2)
+
+
     def addPenalty(self, number, value1, value2):
         self.pen_count += 1
         self.penalties.append((number, value1, value2))
