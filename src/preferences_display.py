@@ -163,3 +163,23 @@ class PreferencesDisplay:
 
         self.qual = qual
 
+
+    def addPenalty(self, number, value1, value2):
+        self.pen_count += 1
+        self.penalties.append((number, value1, value2))
+        self.pen.insert(parent='',index='end',iid=self.pen_count-1,text='',
+                        values=(number, value1, value2))
+
+
+    def addPossibilistic(self, number, value1, value2):
+        self.poss_count += 1
+        self.possibilistics.append((number, value1, value2))
+        self.poss.insert(parent='',index='end',iid=self.poss_count-1,text='',
+                        values=(number, value1, value2))
+                        
+
+    def addQualititative(self, number, value1, value2):
+        self.qual_count += 1
+        self.qualitatives.append((number, value1, value2))
+        self.qual.insert(parent='',index='end',iid=self.qual_count-1,text='',
+                        values=(number, value1, value2))
