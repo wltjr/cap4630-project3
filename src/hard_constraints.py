@@ -105,3 +105,7 @@ class HardConstraints(InputUI):
                 continue
             self.add(line)
 
+
+    def reset(self):
+        self.constraints.count = 0
+        self.constraints.hc.clear()
