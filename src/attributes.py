@@ -154,3 +154,7 @@ class Attributes(InputUI):
 
         open_file = Button(attr_frame, text='Open File', command=self.openFileCallback)
         open_file.pack(side=LEFT, padx=5, pady=5)
+
+    def reset(self):
+        self.attributes.count = 0
+        self.attributes.attr.clear()
