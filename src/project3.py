@@ -85,6 +85,7 @@ class ui:
         self.preferences.poss.clear()
         self.preferences.pen_count = 0
         self.preferences.pen.clear()
+        self.prefDisplay.reset()
 
 
     def run(self):
@@ -103,16 +104,16 @@ class ui:
         # wrapper frames
         frame = Frame(tab1)
 
+        self.tasks = TasksDisplay(tab2)
+        self.prefDisplay = PreferencesDisplay(tab2)
+
         # main UI, tables and forms
         group_frame = Frame(frame)
         self.attributes = Attributes(group_frame)
         self.constraints = HardConstraints(group_frame)
         group_frame.pack(side=LEFT, padx=5)
-        self.preferences = Preferences(frame)
+        self.preferences = Preferences(frame, self.prefDisplay)
         frame.pack()
-
-        self.tasks = TasksDisplay(tab2)
-        self.prefDisplay = PreferencesDisplay(tab2)
 
         self.notebook = notebook
         self.tab1 = tab1
