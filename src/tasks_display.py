@@ -1,9 +1,6 @@
 #!/usr/bin/python
 
 from tkinter import *
-from tkinter import ttk
-from tkinter import filedialog as fd
-from tkinter import messagebox as mb
 from table import Table
 
 class TasksDisplay:
