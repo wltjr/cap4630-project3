@@ -2,6 +2,7 @@
 
 import re
 from input_ui import InputUI
+from preferences_display import *
 from table import Table
 from tkinter import *
 from tkinter import messagebox as mb
@@ -12,11 +13,12 @@ class Preferences(InputUI):
     possibilistic logic, and qualitative choice logic
     """
 
-    def __init__(self, root):
+    def __init__(self, root, prefDisplay):
         """
         Creates an initial GUI to display attributes and instantiates the class
 
-        :param root tk root window
+        :param root tk root window or frame
+        :param prefDisplay an instances of the PreferenceDisplay class
         """
         self.pen_count = 0
         self.poss_count = 0
@@ -24,6 +26,7 @@ class Preferences(InputUI):
         self.penalties = []
         self.possibilistics = []
         self.qualitatives = []
+        self.prefDisplay = prefDisplay
 
         # Preferences Frame
         pref_frame = Frame(root)
@@ -171,18 +174,21 @@ class Preferences(InputUI):
             self.qualitatives.append(preference)
             self.qual.insert(parent='',index='end',iid=self.qual_count-1,text='',
                              values=(self.qual_count, preference, ""))
+            self.prefDisplay.addQualitativeColumn(self.qual_count)
         # value with decimal, possibilistic logic
         elif value.find('.') != -1:
             self.poss_count += 1
             self.possibilistics.append((preference,value))
             self.poss.insert(parent='',index='end',iid=self.poss_count-1,text='',
                              values=(self.poss_count, preference, value))
+            self.prefDisplay.addPossibiliticColumn(self.poss_count)
         # otherwise penalty logic
         else:
             self.pen_count += 1
             self.penalties.append((preference,value))
             self.pen.insert(parent='',index='end',iid=self.pen_count-1,text='',
                             values=(self.pen_count, preference, value))
+            self.prefDisplay.addPenaltyColumn(self.pen_count)
 
 
     def getInput(self):
