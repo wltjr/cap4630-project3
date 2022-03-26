@@ -229,3 +229,12 @@ class Preferences(InputUI):
                 self.add(values[0],values[1])
             else:
                 self.add(line,"")
+
+
+    def reset(self):
+        self.preferences.qual_count = 0
+        self.preferences.qual.clear()
+        self.preferences.poss_count = 0
+        self.preferences.poss.clear()
+        self.preferences.pen_count = 0
+        self.preferences.pen.clear()
