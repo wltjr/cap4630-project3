@@ -8,6 +8,7 @@ from preferences_display import *
 from tasks_display import *
 from tkinter import *
 from tkinter import messagebox as mb
+from tkinter.ttk import Notebook
 
 class ui:
 
@@ -83,10 +84,10 @@ class ui:
         root = Tk()
         root.title('Project 3')
 
-        notebook = ttk.Notebook(root)
+        notebook = Notebook(root)
         
-        tab1 = ttk.Frame(notebook)
-        tab2 = ttk.Frame(notebook)
+        tab1 = Frame(notebook)
+        tab2 = Frame(notebook)
 
         notebook.add(tab1, text="Input")
         notebook.add(tab2, text="Output")
