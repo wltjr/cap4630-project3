@@ -109,6 +109,12 @@ class PreferencesDisplay:
 
 
     def reset(self):
+        self.pen_count = 0
+        self.poss_count = 0
+        self.qual_count = 0
+        self.pen.clear()
+        self.poss.clear()
+        self.qual.clear()
         self.addPenaltyColumn(0)
         self.addPossibiliticColumn(0)
         self.addQualitativeColumn(0)
