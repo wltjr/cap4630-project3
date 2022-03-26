@@ -123,7 +123,6 @@ class PreferencesDisplay:
         self.addColumn(self.qual, False, number)
 
     def addColumn(self, table, hasTotal, number):
-        print(table['columns'])
         if number > 0:
             prefNumber = "pref" + str(number)
             table['columns'] = tuple(sorted(list(table['columns']) + [prefNumber]))
@@ -132,13 +131,10 @@ class PreferencesDisplay:
                 table['columns'] = ('objectNumber', 'total')
             else:
                 table['columns'] = ('objectNumber')
-        print(table['columns'])
 
-        # Penality Columns
         table.column("#0", width=0,  stretch=NO)
         table.column("objectNumber", anchor=CENTER, width=60)
 
-        # Penality Headings
         table.heading("#0",text="",anchor=CENTER)
         table.heading("objectNumber",text="Obj #",anchor=CENTER)
 
