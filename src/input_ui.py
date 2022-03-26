@@ -15,7 +15,8 @@ class InputUI(ABC):
         Open file selection dialog, base implementation to be called and
         extended by base classes
         """
-        filename = fd.askopenfilename()
+        filename = fd.askopenfilename(initialdir="../files/",
+                                      title=("Select "+self.__class__.__name__+ " File"))
 
         if filename == () or filename == "":
             return
