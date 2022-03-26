@@ -148,22 +148,22 @@ class PreferencesDisplay:
             table.heading("total",text="Total",anchor=CENTER)
 
 
-    def addPenalty(self, number, value1, value2):
+    def addPenalty(self, valuesList):
         self.pen_count += 1
-        self.penalties.append((number, value1, value2))
+        self.penalties.append(valuesList)
         self.pen.insert(parent='',index='end',iid=self.pen_count-1,text='',
-                        values=(number, value1, value2))
+                        values=valuesList)
 
 
-    def addPossibilistic(self, number, value1, value2):
+    def addPossibilistic(self, valuesList):
         self.poss_count += 1
-        self.possibilistics.append((number, value1, value2))
+        self.possibilistics.append(valuesList)
         self.poss.insert(parent='',index='end',iid=self.poss_count-1,text='',
-                        values=(number, value1, value2))
+                        values=valuesList)
                         
 
-    def addQualititative(self, number, value1, value2):
+    def addQualititative(self, valuesList):
         self.qual_count += 1
-        self.qualitatives.append((number, value1, value2))
+        self.qualitatives.append(valuesList)
         self.qual.insert(parent='',index='end',iid=self.qual_count-1,text='',
-                        values=(number, value1, value2))
+                        values=valuesList)
