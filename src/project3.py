@@ -72,16 +72,10 @@ class ui:
 
 
     def reset(self):
-        self.attributes.count = 0
-        self.attributes.attr.clear()
-        self.constraints.count = 0
-        self.constraints.hc.clear()
-        self.preferences.qual_count = 0
-        self.preferences.qual.clear()
-        self.preferences.poss_count = 0
-        self.preferences.poss.clear()
-        self.preferences.pen_count = 0
-        self.preferences.pen.clear()
+        self.attributes.reset()
+        self.constraints.reset()
+        self.preferences.reset()
+        self.tasks.clearTable()
         self.prefDisplay.reset()
 
 
