@@ -10,9 +10,6 @@ from tkinter import *
 from tkinter import messagebox as mb
 
 class ui:
-    def openFileCallback():
-        name = fd.askopenfilename()
-        print(name)
 
     def getClause(self, string):
         clause = []
