@@ -1,0 +1,23 @@
+# Penalty Logic
+four AND car, 6
+leather AND xm, 5
+manual OR truck, 2
+two OR twd, 3
+manual AND soft, 4
+car AND auto, 1
+
+# Possibilitic Logic
+four AND car, 0.6
+leather AND xm, 0.5
+manual OR truck, 0.2
+two OR twd, 0.3
+manual AND soft, 0.4
+car AND auto, 0.1
+
+#Qualitative Choice Logic
+electric BT gas IF car
+four BT two IF car
+manual OR truck BT manual AND car IF
+fm/am BT xm IF truck
+xm BT fm/am IF car
+awd BT twd IF truck
