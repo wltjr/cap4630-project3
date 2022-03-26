@@ -27,16 +27,16 @@ class PreferencesDisplay:
 
         # Preferences Frame
         pref_frame = Frame(root)
-        pref_frame.pack(side=LEFT, padx=5, pady=5)
+        pref_frame.pack(side=LEFT, padx=(0,5), pady=5, fill=X, expand=1)
 
         # Penalty Frame and Scrollbars
         pen_frame = Frame(pref_frame)
-        pen_frame.pack()
+        pen_frame.pack(fill=X)
 
         Label(pen_frame, text="Penalty Logic").pack()
 
         pen_table_frame = Frame(pen_frame)
-        pen_table_frame.pack()
+        pen_table_frame.pack(fill=X)
 
         pen_scroll_y = Scrollbar(pen_table_frame)
         pen_scroll_y.pack(side=RIGHT, fill=Y)
@@ -52,39 +52,17 @@ class PreferencesDisplay:
         pen_scroll_y.config(command=pen.yview)
         pen_scroll_x.config(command=pen.xview)
 
-        # Penality Columns
-        pen['columns'] = ('number', 'object1', 'object2')
-        pen.column("#0", width=0,  stretch=NO)
-        pen.column("number", anchor=CENTER, width=60)
-        pen.column("object1", anchor=CENTER, width=60)
-        pen.column("object2", anchor=CENTER, width=60)
-
-        # Penality Headings
-        pen.heading("#0",text="",anchor=CENTER)
-        pen.heading("number",text="Pref #",anchor=CENTER)
-        pen.heading("object1",text="Object 1",anchor=CENTER)
-        pen.heading("object2",text="Object 2",anchor=CENTER)
-
-        pen_total_frame = Frame(pen_frame)
-        pen_total_frame.pack(side=RIGHT, padx=(0,10))
-
-        Label(pen_total_frame,text="Total").grid(row=0,column=0,padx=(0,5))
-
-        self.pen_object1_total = Entry(pen_total_frame, state='disabled', width=11)
-        self.pen_object1_total.grid(row=0,column=1)
-        self.pen_object2_total = Entry(pen_total_frame, state='disabled', width=11)
-        self.pen_object2_total.grid(row=0,column=2)
-
         self.pen = pen
+        self.addPenaltyColumn(0)
 
         # Possibilistic Frame and Scrollbars
         poss_frame = Frame(pref_frame)
-        poss_frame.pack()
+        poss_frame.pack(fill=X)
 
         Label(poss_frame, text="Possibilistic Logic").pack()
 
         poss_table_frame = Frame(poss_frame)
-        poss_table_frame.pack()
+        poss_table_frame.pack(fill=X)
 
         poss_scroll_y = Scrollbar(poss_table_frame)
         poss_scroll_y.pack(side=RIGHT, fill=Y)
@@ -100,39 +78,17 @@ class PreferencesDisplay:
         poss_scroll_y.config(command=poss.yview)
         poss_scroll_x.config(command=poss.xview)
 
-        # Possibilistic Columns
-        poss['columns'] = ('number', 'object1', 'object2')
-        poss.column("#0", width=0,  stretch=NO)
-        poss.column("number", anchor=CENTER, width=60)
-        poss.column("object1", anchor=CENTER, width=60)
-        poss.column("object2", anchor=CENTER, width=60)
-
-        # Possibilistic Headings
-        poss.heading("#0",text="",anchor=CENTER)
-        poss.heading("number",text="Pref #",anchor=CENTER)
-        poss.heading("object1",text="Object 1",anchor=CENTER)
-        poss.heading("object2",text="Object 2",anchor=CENTER)
-
-        poss_total_frame = Frame(poss_frame)
-        poss_total_frame.pack(side=RIGHT, padx=(0,10))
-
-        Label(poss_total_frame,text="Total").grid(row=0,column=0,padx=(0,5))
-
-        self.poss_object1_total = Entry(poss_total_frame, state='disabled', width=11)
-        self.poss_object1_total.grid(row=0,column=1)
-        self.poss_object2_total = Entry(poss_total_frame, state='disabled', width=11)
-        self.poss_object2_total.grid(row=0,column=2)
-
         self.poss = poss
+        self.addPossibiliticColumn(0)
 
         # Qualitative Frame and Scrollbars
         qual_frame = Frame(pref_frame)
-        qual_frame.pack()
+        qual_frame.pack(fill=X)
 
         Label(qual_frame, text="Qualitative Logic").pack()
 
         qual_table_frame = Frame(qual_frame)
-        qual_table_frame.pack()
+        qual_table_frame.pack(fill=X)
 
         qual_scroll_y = Scrollbar(qual_table_frame)
         qual_scroll_y.pack(side=RIGHT, fill=Y)
@@ -148,29 +104,52 @@ class PreferencesDisplay:
         qual_scroll_y.config(command=qual.yview)
         qual_scroll_x.config(command=qual.xview)
 
-        # Qualitative Columns
-        qual['columns'] = ('number', 'object1', 'object2')
-        qual.column("#0", width=0,  stretch=NO)
-        qual.column("number", anchor=CENTER, width=60)
-        qual.column("object1", anchor=CENTER, width=60)
-        qual.column("object2", anchor=CENTER, width=60)
-
-        # Qualitative Headings
-        qual.heading("#0",text="",anchor=CENTER)
-        qual.heading("number",text="Pref #",anchor=CENTER)
-        qual.heading("object1",text="Object 1",anchor=CENTER)
-        qual.heading("object2",text="Object 2",anchor=CENTER)
-
         self.qual = qual
+        self.addQualitativeColumn(0)
 
 
-    def setHeaderColumnObjNames(self, object1, object2):
-        self.pen.heading("object1",text=object1)
-        self.pen.heading("object2",text=object2)
-        self.poss.heading("object1",text=object1)
-        self.poss.heading("object2",text=object2)
-        self.qual.heading("object1",text=object1)
-        self.qual.heading("object2",text=object2)
+    def reset(self):
+        self.addPenaltyColumn(0)
+        self.addPossibiliticColumn(0)
+        self.addQualitativeColumn(0)
+
+    def addPenaltyColumn(self, number):
+        self.addColumn(self.pen, True, number)
+
+    def addPossibiliticColumn(self, number):
+        self.addColumn(self.poss, True, number)
+
+    def addQualitativeColumn(self, number):
+        self.addColumn(self.qual, False, number)
+
+    def addColumn(self, table, hasTotal, number):
+        print(table['columns'])
+        if number > 0:
+            prefNumber = "pref" + str(number)
+            table['columns'] = tuple(sorted(list(table['columns']) + [prefNumber]))
+        else:
+            if hasTotal:
+                table['columns'] = ('objectNumber', 'total')
+            else:
+                table['columns'] = ('objectNumber')
+        print(table['columns'])
+
+        # Penality Columns
+        table.column("#0", width=0,  stretch=NO)
+        table.column("objectNumber", anchor=CENTER, width=60)
+
+        # Penality Headings
+        table.heading("#0",text="",anchor=CENTER)
+        table.heading("objectNumber",text="Obj #",anchor=CENTER)
+
+        for i in range(1, number+1):
+            prefNumber = "pref" + str(i)
+            table.column(prefNumber, anchor=CENTER, width=60)
+            table.heading(prefNumber, text="Pref " + str(i), anchor=CENTER)
+
+        if hasTotal:
+            table.column("total", anchor=CENTER, width=60)
+            table.heading("total",text="Total",anchor=CENTER)
 
 
     def addPenalty(self, number, value1, value2):
