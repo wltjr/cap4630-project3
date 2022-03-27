@@ -12,6 +12,8 @@ class PreferencesDisplay:
     possibilistic logic, and qualitative choice logic
     """
 
+    columnWidth = 50
+
     def __init__(self, root):
         """
         Creates an initial GUI to display preference values and totals
@@ -144,18 +146,18 @@ class PreferencesDisplay:
                 table['columns'] = ('objectNumber')
 
         table.column("#0", width=0,  stretch=NO)
-        table.column("objectNumber", anchor=CENTER, width=60)
+        table.column("objectNumber", anchor=CENTER, width=self.columnWidth)
 
         table.heading("#0",text="",anchor=CENTER)
         table.heading("objectNumber",text="Obj #",anchor=CENTER)
 
         for i in range(1, number+1):
             prefNumber = "pref" + str(i)
-            table.column(prefNumber, anchor=CENTER, width=60)
+            table.column(prefNumber, anchor=CENTER, width=self.columnWidth)
             table.heading(prefNumber, text="Pref " + str(i), anchor=CENTER)
 
         if hasTotal:
-            table.column("total", anchor=CENTER, width=60)
+            table.column("total", anchor=CENTER, width=self.columnWidth)
             table.heading("total",text="Total",anchor=CENTER)
 
 
