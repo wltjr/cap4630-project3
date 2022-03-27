@@ -190,6 +190,17 @@ class Preferences(InputUI):
                             values=(self.pen_count, preference, value))
             self.prefDisplay.addPenaltyColumn(self.pen_count)
 
+    def clear(self):
+        """
+        Clear all tables and reset count variables
+        """
+        self.qual_count = 0
+        self.poss_count = 0
+        self.pen_count = 0
+        self.poss.clear()
+        self.qual.clear()
+        self.pen.clear()
+
 
     def getInput(self):
         """
@@ -212,14 +223,7 @@ class Preferences(InputUI):
         if file == None:
             return
 
-        self.qual_count = 0
-        self.qual.clear()
-
-        self.poss_count = 0
-        self.poss.clear()
-
-        self.pen_count = 0
-        self.pen.clear()
+        self.clear()
 
         for line in file:
             if line[0] == '\n' or line[0] == '#':
@@ -232,12 +236,7 @@ class Preferences(InputUI):
 
 
     def reset(self):
-        self.qual_count = 0
-        self.qual.clear()
-        self.poss_count = 0
-        self.poss.clear()
-        self.pen_count = 0
-        self.pen.clear()
+        self.clear()
         self.penalties = []
         self.possibilistics = []
         self.qualitatives = []
