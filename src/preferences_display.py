@@ -107,14 +107,19 @@ class PreferencesDisplay:
         self.qual = qual
         self.addQualitativeColumn(0)
 
-
-    def reset(self):
+    def clear(self):
+        """
+        Clear all tables and reset count variables
+        """
         self.pen_count = 0
         self.poss_count = 0
         self.qual_count = 0
         self.pen.clear()
         self.poss.clear()
         self.qual.clear()
+
+    def reset(self):
+        self.clear()
         self.addPenaltyColumn(0)
         self.addPossibiliticColumn(0)
         self.addQualitativeColumn(0)
