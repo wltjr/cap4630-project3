@@ -34,7 +34,7 @@ class HardConstraints(InputUI):
         hc_scroll_x = Scrollbar(hc_table_frame,orient='horizontal')
         hc_scroll_x.pack(side=BOTTOM, fill=X)
 
-        hc = Table(hc_table_frame, height=6,
+        hc = Table(hc_table_frame, height=7,
                    yscrollcommand=hc_scroll_y.set,
                    xscrollcommand=hc_scroll_x.set)
         hc.pack(fill='x')
