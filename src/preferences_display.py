@@ -1,10 +1,7 @@
 0#!/usr/bin/python
 
-import re
-from input_ui import InputUI
 from table import Table
 from tkinter import *
-from tkinter import messagebox as mb
 
 class PreferencesDisplay:
     """
