@@ -9,18 +9,11 @@ from tasks_display import *
 from tkinter import *
 from tkinter import messagebox as mb
 from tkinter.ttk import Notebook
-import copy
-import random
 
 class ui:
 
-    penal = {}
-    possy = {}
-    qualit = {}
-    opt_penal = {}
-    opt_possy = {}
-    opt_qualit = {}
-
+    penalties = {}
+    possibilistic = {}
 
     def getClause(self, string):
         clause = []
@@ -60,88 +53,73 @@ class ui:
 
         self.tasks.clearTable()
 
-        for solution in self.prefClauses(self.constraints.constraints):
+        clauses = []
+        for constrant in self.constraints.constraints:
+            for clause in self.getClause(constrant):
+                clauses.append(clause)
+        self.clauses = clauses
+
+        clasp = Clasp()
+        solutions = clasp.solve(0, attributeCount, clauses)
+        for solution in solutions:
             text = ""
             for key in solution:
                 text += self.attributes.getValueByKey(key) + " "
             text = text[:-1]
             self.tasks.add(solution, text)
 
-        self.penaLogic(self.preferences.penalties)
+        self.clasp = clasp
+        self.solutions = solutions
 
         self.notebook.select(self.tab2)
 
-    def prefClauses(self, pref):
-        clauses = []
-        for constrant in pref:
-            for clause in self.getClause(constrant):
-                clauses.append(clause)
-        self.clauses = clauses
-
-        clasp = Clasp()
-        return clasp.solve(0, self.attributes.count, clauses)
-
-    def penaLogic(self, pref_logic):
-        prefs = []
-        constrs = self.prefClauses(self.constraints.constraints)
-
-        for item in pref_logic:
-            constraints = copy.deepcopy(self.constraints.constraints)
-            constraints.extend([item[0]])
-            prefs.append(self.prefClauses(constraints))
-
-        for x in prefs:
-            print(x)
-
-        for x in constrs:
-            points = []
-            for count, y in enumerate(prefs):
-                pref = int(pref_logic[count][1])
-                if x in y:
-                    if pref < 1:
-                        points.append(1)
-                        print(x, 1)
-                    else:
-                        points.append(0)
-                        print(x, 0)
-                else:
-                    if pref < 1:
-                        points.append(1 - pref)
-                        print(x, 1 - pref)
-                    else:
-                        points.append(pref)
-                        print(x, pref)
-            self.penal[tuple(x)] = points
-            print()
-
-        print(self.penal)
-
-        libr = {}
-
-        if(int(pref_logic[count][1]) >= 1):
-            summ = float('inf')
-            for item in self.penal.values():
-                summ = min(summ, sum(item))
-
-            for key, value in self.penal.items():
-                if sum(value) == summ:
-                    self.opt_penal[key] = value
-            libr = self.opt_penal
-        else:
-            maxx = 0
-            for item in self.penal.values():
-                maxx = max(maxx, min(item))
-
-            for key, value in self.penal.items():
-                if min(value) == maxx:
-                    self.opt_possy[key] = value
-            libr = self.opt_possy
-
-        print(libr)
 
     def exemplify(self):
-        # self.existence()
-        return
+        self.existence()
+        self.valueLogic(self.preferences.penalties, False)
+        self.valueLogic(self.preferences.possibilistics, True)
+
+
+    def valueLogic(self, pref_logic, bool):
+        prefs = []
+        constrs = self.solutions
+
+        for item in pref_logic:
+            clauses = self.clauses + self.getClause(item[0])
+            prefs.append(self.clasp.solve(0, self.attributes.count, clauses))
+
+        for objNum, x in enumerate(constrs):
+            points = []
+            if bool:
+                total = 1
+            else:
+                total = 0
+            for count, y in enumerate(prefs):
+                if bool:
+                    pref = float(pref_logic[count][1])
+                else:
+                    pref = int(pref_logic[count][1])
+                if x in y:
+                    if bool:
+                        points.append(1)
+                        total = min(total, 1)
+                    else:
+                        points.append(0)
+                else:
+                    if bool:
+                        value = round((1 - pref),1)
+                        points.append(value)
+                        total = min(total, value)
+                    else:
+                        points.append(pref)
+                        total = total + pref
+            if bool:
+                self.prefDisplay.addPossibilistic([objNum+1] + points + [total])
+                self.possibilistic[tuple(x)] = points
+            else:
+                self.prefDisplay.addPenalty([objNum+1] + points + [total])
+                self.penalties[tuple(x)] = points
+
 
     def reset(self):
         self.attributes.reset()
