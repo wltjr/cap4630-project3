@@ -131,6 +131,23 @@ class ui:
             self.optimal.addPossibilistic(self.tasks.objects[key])
 
 
+    def optimize(self):
+        """
+        Wraps the exemplify method and is used to list the first optimal
+        object already found as part of exemplify operation
+        """
+        if len(self.penalties) == 0:
+            self.exemplify()
+
+        self.optimal.reset()
+
+        key = list(self.penalties.keys())[0]
+        self.optimal.addPenalty(self.tasks.objects[key])
+
+        key = list(self.possibilistic.keys())[0]
+        self.optimal.addPossibilistic(self.tasks.objects[key])
+
+
     def valueLogic(self, pref_logic, bool):
         """
         Performs preference logic for penalty and possibilistic logics and
@@ -240,7 +257,7 @@ class ui:
         exemplify.pack(side=LEFT, padx=5, pady=5)
 
         # optimize button
-        optimize = Button(root, text='Optimize', command=None)
+        optimize = Button(root, text='Optimize', command=self.optimize)
         optimize.pack(side=LEFT, padx=5, pady=5)
 
         # omni-optimize button
