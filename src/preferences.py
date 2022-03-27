@@ -232,9 +232,12 @@ class Preferences(InputUI):
 
 
     def reset(self):
-        self.preferences.qual_count = 0
-        self.preferences.qual.clear()
-        self.preferences.poss_count = 0
-        self.preferences.poss.clear()
-        self.preferences.pen_count = 0
-        self.preferences.pen.clear()
+        self.qual_count = 0
+        self.qual.clear()
+        self.poss_count = 0
+        self.poss.clear()
+        self.pen_count = 0
+        self.pen.clear()
+        self.penalties = []
+        self.possibilistics = []
+        self.qualitatives = []
