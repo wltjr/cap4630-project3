@@ -8,7 +8,9 @@ class TasksDisplay:
     TaskDisplay class to display various tasks output, object table
     """
 
+    count = 0
     defaultFeasibleLabel = "0 Feasible Objects"
+    objects = {}
 
     def __init__(self, root):
         """
@@ -16,12 +18,10 @@ class TasksDisplay:
 
         :param root tk root window or frame
         """
-        self.count = 0
-        self.objects = []
 
         # Task Display Frame and Scrollbars
         td_frame = Frame(root)
-        td_frame.pack(side=LEFT, padx=5, pady=5)
+        td_frame.pack()
 
         self.td_label = Label(td_frame, text=self.defaultFeasibleLabel)
         self.td_label.pack()
@@ -35,7 +35,7 @@ class TasksDisplay:
         td_scroll_x = Scrollbar(td_table_frame,orient='horizontal')
         td_scroll_x.pack(side=BOTTOM,fill=X)
 
-        td = Table(td_table_frame, height=23,
+        td = Table(td_table_frame, height=5,
                    yscrollcommand=td_scroll_y.set,
                    xscrollcommand =td_scroll_x.set)
         td.pack(fill='x')
@@ -60,7 +60,7 @@ class TasksDisplay:
 
     def add(self, clasp, object):
         self.count += 1
-        self.objects.append(clasp)
+        self.objects[self.count] = [self.count, clasp, object]
         self.td.insert(parent='',index='end',iid=self.count-1,text='',
                        values=(self.count, clasp, object))
         self.td_label.config(text=str(self.count)+self.defaultFeasibleLabel[1:])
