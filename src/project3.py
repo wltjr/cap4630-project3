@@ -95,6 +95,7 @@ class ui:
         to determine strict preference or equivalence among the two.
         """
         self.existence()
+        self.prefDisplay.clear()
         self.valueLogic(self.preferences.penalties, False)
         self.valueLogic(self.preferences.possibilistics, True)
         self.penalties = dict(sorted(self.penalties.items(),
