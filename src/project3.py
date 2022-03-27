@@ -18,6 +18,7 @@ class ui:
 
     penalties = {}
     possibilistic = {}
+    solutions = []
 
     def getClause(self, string):
         """
@@ -147,6 +148,10 @@ class ui:
         """
         if len(self.penalties) == 0:
             self.exemplify()
+
+        if self.prefDisplay.pen_count == 0 or \
+           self.prefDisplay.poss_count == 0:
+            return
 
         self.optimal.reset()
 
