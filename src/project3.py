@@ -94,6 +94,14 @@ class ui:
         Wraps the existence method and is used to compare two random objects
         to determine strict preference or equivalence among the two.
         """
+        if self.preferences.pen_count == 0 or \
+           self.preferences.poss_count == 0 or \
+           self.preferences.qual_count == 0:
+            mb.showerror("Empty Preferences Error",
+                         "Please load or enter preferences")
+            self.notebook.select(self.tab1)
+            return
+
         self.existence()
         self.prefDisplay.clear()
         self.valueLogic(self.preferences.penalties, False)
