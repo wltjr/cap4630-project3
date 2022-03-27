@@ -96,6 +96,11 @@ class ui:
         self.existence()
         self.valueLogic(self.preferences.penalties, False)
         self.valueLogic(self.preferences.possibilistics, True)
+        self.penalties = dict(sorted(self.penalties.items(),
+                                     key=lambda x:x[1]))
+        self.possibilistic = dict(sorted(self.possibilistic.items(),
+                                         key=lambda x:x[1],
+                                         reverse=True))
 
 
     def valueLogic(self, pref_logic, bool):
@@ -140,12 +145,13 @@ class ui:
                     else:
                         points.append(pref)
                         total = total + pref
+            objNum += 1
             if bool:
-                self.prefDisplay.addPossibilistic([objNum+1] + points + [total])
-                self.possibilistic[tuple(x)] = points
+                self.prefDisplay.addPossibilistic([objNum] + points + [total])
+                self.possibilistic[objNum] = total
             else:
-                self.prefDisplay.addPenalty([objNum+1] + points + [total])
-                self.penalties[tuple(x)] = points
+                self.prefDisplay.addPenalty([objNum] + points + [total])
+                self.penalties[objNum] = total
 
 
     def reset(self):
