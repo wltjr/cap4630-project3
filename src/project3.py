@@ -3,6 +3,7 @@
 from attributes import *
 from clasp import *
 from hard_constraints import *
+from optimal_display import *
 from preferences import *
 from preferences_display import *
 from tasks_display import *
@@ -103,6 +104,33 @@ class ui:
                                          reverse=True))
 
 
+    def omni_optimize(self):
+        """
+        Wraps the exemplify method and is used to list all optimal objects
+        already found as part of exemplify operation
+        """
+        if len(self.penalties) == 0:
+            self.exemplify()
+
+        self.optimal.reset()
+
+        value = -1
+        for key, val in self.penalties.items():
+            if value == -1:
+                value = val
+            if val != value:
+                break
+            self.optimal.addPenalty(self.tasks.objects[key])
+
+        value = -1
+        for key, val in self.possibilistic.items():
+            if value == -1:
+                value = val
+            if val != value:
+                break
+            self.optimal.addPossibilistic(self.tasks.objects[key])
+
+
     def valueLogic(self, pref_logic, bool):
         """
         Performs preference logic for penalty and possibilistic logics and
@@ -162,6 +190,7 @@ class ui:
         self.constraints.reset()
         self.preferences.reset()
         self.tasks.clearTable()
+        self.optimal.reset()
         self.prefDisplay.reset()
 
 
@@ -184,7 +213,10 @@ class ui:
         # wrapper frames
         frame = Frame(tab1)
 
-        self.tasks = TasksDisplay(tab2)
+        objects_frame = Frame(tab2)
+        self.tasks = TasksDisplay(objects_frame)
+        self.optimal = OptimalDisplay(objects_frame)
+        objects_frame.pack(side=LEFT, padx=5)
         self.prefDisplay = PreferencesDisplay(tab2)
 
         # main UI, tables and forms
@@ -212,7 +244,7 @@ class ui:
         optimize.pack(side=LEFT, padx=5, pady=5)
 
         # omni-optimize button
-        omni_optimize = Button(root, text='Omni-optimize', command=None)
+        omni_optimize = Button(root, text='Omni-optimize', command=self.omni_optimize)
         omni_optimize.pack(side=LEFT, padx=5, pady=5)
 
         # quit button
