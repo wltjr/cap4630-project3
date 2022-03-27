@@ -72,7 +72,7 @@ class Preferences(InputUI):
 
         # Possibilistic Frame and Scrollbars
         poss_frame = Frame(pref_frame)
-        poss_frame.pack()
+        poss_frame.pack(pady=5)
 
         Label(poss_frame, text="Possibilistic Logic").pack()
 
