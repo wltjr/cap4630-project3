@@ -107,5 +107,6 @@ class HardConstraints(InputUI):
 
 
     def reset(self):
-        self.constraints.count = 0
-        self.constraints.hc.clear()
+        self.count = 0
+        self.hc.clear()
+        self.constraints = []
