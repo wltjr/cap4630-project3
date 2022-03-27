@@ -11,11 +11,21 @@ from tkinter import messagebox as mb
 from tkinter.ttk import Notebook
 
 class ui:
+    """
+    User Interface class displays GUI for the project and is the main class
+    """
 
     penalties = {}
     possibilistic = {}
 
     def getClause(self, string):
+        """
+        Converts a string like this OR that AND something OR something_else
+        into a numeric CNF clasp formatted for processing by clasp
+
+        :param string a string to be converted to CNF in clasp format
+        :return a list of clauses in clasp format
+        """
         clause = []
         stringlist = string.split()
         newstring = ""
@@ -38,6 +48,10 @@ class ui:
         return clause
 
     def existence(self):
+        """
+        Invokes clasp to find feasible objects among the attributes based on
+        hard constraints and displays the results in a table on the output tab
+        """
         attributeCount = self.attributes.count
         if attributeCount == 0:
             mb.showerror("Empty Attributes Error",
@@ -75,12 +89,25 @@ class ui:
 
 
     def exemplify(self):
+        """
+        Wraps the existence method and is used to compare two random objects
+        to determine strict preference or equivalence among the two.
+        """
         self.existence()
         self.valueLogic(self.preferences.penalties, False)
         self.valueLogic(self.preferences.possibilistics, True)
 
 
     def valueLogic(self, pref_logic, bool):
+        """
+        Performs preference logic for penalty and possibilistic logics and
+        displays the results in tables on the output tab.
+
+        :param pref_logic a list of the preferences in english to be converted
+                          to CNF in clasp numeric format
+        :param bool       a boolean toggle variable to switch preferences
+                          between penalty and possibilistic logic
+        """
         prefs = []
         constrs = self.solutions
 
@@ -122,6 +149,9 @@ class ui:
 
 
     def reset(self):
+        """
+        Reset all tables in the GUI
+        """
         self.attributes.reset()
         self.constraints.reset()
         self.preferences.reset()
@@ -130,6 +160,9 @@ class ui:
 
 
     def run(self):
+        """
+        Run the GUI create the root window, frames, and all GUI widgets
+        """
         root = Tk()
         root.title('Project 3')
 
