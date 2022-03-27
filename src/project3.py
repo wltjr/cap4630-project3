@@ -242,7 +242,7 @@ class ui:
         self.constraints = HardConstraints(group_frame)
         group_frame.pack(side=LEFT, padx=5)
         self.preferences = Preferences(frame, self.prefDisplay)
-        frame.pack()
+        frame.pack(padx=(0,5))
 
         self.notebook = notebook
         self.tab1 = tab1
