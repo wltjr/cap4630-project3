@@ -11,7 +11,9 @@ from tasks_display import *
 from tkinter import *
 from tkinter import messagebox as mb
 from tkinter.ttk import Notebook
+import copy
 import random
+
 
 class ui:
     """
@@ -21,6 +23,13 @@ class ui:
     penalties = {}
     possibilistic = {}
     solutions = []
+
+    penal = {}
+    possy = {}
+    qualit = {}
+    opt_penal = {}
+    opt_possy = {}
+    opt_qualit = {}
 
     def getClause(self, string):
         """
@@ -71,182 +80,88 @@ class ui:
 
         self.tasks.clearTable()
 
-        clauses = []
-        for constrant in self.constraints.constraints:
-            for clause in self.getClause(constrant):
-                clauses.append(clause)
-        self.clauses = clauses
-
-        clasp = Clasp()
-        solutions = clasp.solve(0, attributeCount, clauses)
-        for solution in solutions:
+        for solution in self.prefClauses(self.constraints.constraints):
             text = ""
             for key in solution:
                 text += self.attributes.getValueByKey(key) + " "
             text = text[:-1]
             self.tasks.add(solution, text)
 
-        self.clasp = clasp
-        self.solutions = solutions
+        self.penaLogic(self.preferences.penalties)
 
         self.notebook.select(self.tab2)
 
+    def prefClauses(self, pref):
+        clauses = []
+        for constrant in pref:
+            for clause in self.getClause(constrant):
+                clauses.append(clause)
+        self.clauses = clauses
 
-    def exemplify(self):
-        """
-        Wraps the existence method and is used to compare two random objects
-        to determine strict preference or equivalence among the two.
-        """
-        if self.preferences.pen_count == 0 or \
-           self.preferences.poss_count == 0 or \
-           self.preferences.qual_count == 0:
-            mb.showerror("Empty Preferences Error",
-                         "Please load or enter preferences")
-            self.notebook.select(self.tab1)
-            return
+        clasp = Clasp()
+        return clasp.solve(0, self.attributes.count, clauses)
 
-        self.existence()
-        self.prefDisplay.clear()
-        self.valueLogic(self.preferences.penalties, False)
-        self.valueLogic(self.preferences.possibilistics, True)
-
-        self.exmpDisplay.reset()
-
-        obj1 = random.randint(1,self.tasks.count)
-        obj2 = random.randint(1,self.tasks.count)
-        while obj1 == obj2:
-            obj2 = random.randint(1,self.tasks.count)
-
-        preferences1 = [obj1]
-        preferences2 = [obj2]
-        if self.penalties[obj1] == self.penalties[obj2]:
-            preferences1.append("equivalent")
-            preferences2.append("equivalent")
-        elif self.penalties[obj1] < self.penalties[obj2]:
-            preferences1.append("preferred")
-            preferences2.append("")
-        else:
-            preferences1.append("")
-            preferences2.append("preferred")
-
-        if self.possibilistic[obj1] == self.possibilistic[obj2]:
-            preferences1.append("equivalent")
-            preferences2.append("equivalent")
-        elif self.possibilistic[obj1] > self.possibilistic[obj2]:
-            preferences1.append("preferred")
-            preferences2.append("")
-        else:
-            preferences1.append("")
-            preferences2.append("preferred")
-
-        self.exmpDisplay.add(preferences1)
-        self.exmpDisplay.add(preferences2)
-
-        self.penalties = dict(sorted(self.penalties.items(),
-                                     key=lambda x:x[1]))
-        self.possibilistic = dict(sorted(self.possibilistic.items(),
-                                         key=lambda x:x[1],
-                                         reverse=True))
-
-
-    def omni_optimize(self):
-        """
-        Wraps the exemplify method and is used to list all optimal objects
-        already found as part of exemplify operation
-        """
-        if len(self.penalties) == 0:
-            self.exemplify()
-
-        self.optimal.reset()
-
-        value = -1
-        for key, val in self.penalties.items():
-            if value == -1:
-                value = val
-            if val != value:
-                break
-            self.optimal.addPenalty(self.tasks.objects[key])
-
-        value = -1
-        for key, val in self.possibilistic.items():
-            if value == -1:
-                value = val
-            if val != value:
-                break
-            self.optimal.addPossibilistic(self.tasks.objects[key])
-
-
-    def optimize(self):
-        """
-        Wraps the exemplify method and is used to list the first optimal
-        object already found as part of exemplify operation
-        """
-        if len(self.penalties) == 0:
-            self.exemplify()
-
-        if self.prefDisplay.pen_count == 0 or \
-           self.prefDisplay.poss_count == 0:
-            return
-
-        self.optimal.reset()
-
-        key = list(self.penalties.keys())[0]
-        self.optimal.addPenalty(self.tasks.objects[key])
-
-        key = list(self.possibilistic.keys())[0]
-        self.optimal.addPossibilistic(self.tasks.objects[key])
-
-
-    def valueLogic(self, pref_logic, bool):
-        """
-        Performs preference logic for penalty and possibilistic logics and
-        displays the results in tables on the output tab.
-
-        :param pref_logic a list of the preferences in english to be converted
-                          to CNF in clasp numeric format
-        :param bool       a boolean toggle variable to switch preferences
-                          between penalty and possibilistic logic
-        """
+    def penaLogic(self, pref_logic):
         prefs = []
-        constrs = self.solutions
+        constrs = self.prefClauses(self.constraints.constraints)
 
         for item in pref_logic:
-            clauses = self.clauses + self.getClause(item[0])
-            prefs.append(self.clasp.solve(0, self.attributes.count, clauses))
+            constraints = copy.deepcopy(self.constraints.constraints)
+            constraints.extend([item[0]])
+            prefs.append(self.prefClauses(constraints))
 
-        for objNum, x in enumerate(constrs):
+        for x in prefs:
+            print(x)
+
+        for x in constrs:
             points = []
-            if bool:
-                total = 1
-            else:
-                total = 0
             for count, y in enumerate(prefs):
-                if bool:
-                    pref = float(pref_logic[count][1])
-                else:
-                    pref = int(pref_logic[count][1])
+                pref = int(pref_logic[count][1])
                 if x in y:
-                    if bool:
+                    if pref < 1:
                         points.append(1)
-                        total = min(total, 1)
+                        print(x, 1)
                     else:
                         points.append(0)
+                        print(x, 0)
                 else:
-                    if bool:
-                        value = round((1 - pref),1)
-                        points.append(value)
-                        total = min(total, value)
+                    if pref < 1:
+                        points.append(1 - pref)
+                        print(x, 1 - pref)
                     else:
                         points.append(pref)
-                        total = total + pref
-            objNum += 1
-            if bool:
-                self.prefDisplay.addPossibilistic([objNum] + points + [total])
-                self.possibilistic[objNum] = total
-            else:
-                self.prefDisplay.addPenalty([objNum] + points + [total])
-                self.penalties[objNum] = total
+                        print(x, pref)
+            self.penal[tuple(x)] = points
+            print()
 
+        print(self.penal)
+
+        libr = {}
+
+        if(int(pref_logic[count][1]) >= 1):
+            summ = float('inf')
+            for item in self.penal.values():
+                summ = min(summ, sum(item))
+
+            for key, value in self.penal.items():
+                if sum(value) == summ:
+                    self.opt_penal[key] = value
+            libr = self.opt_penal
+        else:
+            maxx = 0
+            for item in self.penal.values():
+                maxx = max(maxx, min(item))
+
+            for key, value in self.penal.items():
+                if min(value) == maxx:
+                    self.opt_possy[key] = value
+            libr = self.opt_possy
+
+        print(libr)
+
+    def exemplify(self):
+        # self.existence()
+        return
 
     def reset(self):
         """
@@ -259,7 +174,6 @@ class ui:
         self.optimal.reset()
         self.prefDisplay.reset()
 
-
     def run(self):
         """
         Run the GUI create the root window, frames, and all GUI widgets
@@ -268,13 +182,13 @@ class ui:
         root.title('Project 3')
 
         notebook = Notebook(root)
-        
+
         tab1 = Frame(notebook)
         tab2 = Frame(notebook)
 
         notebook.add(tab1, text="Input")
         notebook.add(tab2, text="Output")
-        notebook.pack(expand = 1, fill ="both")
+        notebook.pack(expand=1, fill="both")
 
         # wrapper frames
         frame = Frame(tab1)
@@ -286,7 +200,7 @@ class ui:
         preferences_frame = Frame(tab2)
         self.prefDisplay = PreferencesDisplay(preferences_frame)
         self.exmpDisplay = ExemplifyDisplay(preferences_frame)
-        preferences_frame.pack(side=LEFT, padx=(0,5))
+        preferences_frame.pack(side=LEFT, padx=(0, 5))
 
         # main UI, tables and forms
         group_frame = Frame(frame)
@@ -294,7 +208,7 @@ class ui:
         self.constraints = HardConstraints(group_frame)
         group_frame.pack(side=LEFT, padx=5)
         self.preferences = Preferences(frame, self.prefDisplay)
-        frame.pack(padx=(0,5))
+        frame.pack(padx=(0, 5))
 
         self.notebook = notebook
         self.tab1 = tab1
@@ -313,7 +227,8 @@ class ui:
         optimize.pack(side=LEFT, padx=5, pady=5)
 
         # omni-optimize button
-        omni_optimize = Button(root, text='Omni-optimize', command=self.omni_optimize)
+        omni_optimize = Button(root, text='Omni-optimize',
+                               command=self.omni_optimize)
         omni_optimize.pack(side=LEFT, padx=5, pady=5)
 
         # quit button
