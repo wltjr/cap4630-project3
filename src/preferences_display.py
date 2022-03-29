@@ -10,6 +10,7 @@ class PreferencesDisplay:
     """
 
     columnWidth = 50
+    tableHeight = 4
 
     def __init__(self, root):
         """
@@ -26,7 +27,7 @@ class PreferencesDisplay:
 
         # Preferences Frame
         pref_frame = Frame(root)
-        pref_frame.pack(side=LEFT, padx=(0,5), pady=5, fill=X, expand=1)
+        pref_frame.pack(fill=X, expand=1)
 
         # Penalty Frame and Scrollbars
         pen_frame = Frame(pref_frame)
@@ -43,7 +44,7 @@ class PreferencesDisplay:
         pen_scroll_x = Scrollbar(pen_table_frame,orient='horizontal')
         pen_scroll_x.pack(side=BOTTOM, fill=X)
 
-        pen = Table(pen_table_frame, height=5,
+        pen = Table(pen_table_frame, height=self.tableHeight,
                     yscrollcommand=pen_scroll_y.set,
                     xscrollcommand=pen_scroll_x.set,)
         pen.pack(fill='x')
@@ -69,7 +70,7 @@ class PreferencesDisplay:
         poss_scroll_x = Scrollbar(poss_table_frame,orient='horizontal')
         poss_scroll_x.pack(side=BOTTOM, fill=X)
 
-        poss = Table(poss_table_frame, height=5,
+        poss = Table(poss_table_frame, height=self.tableHeight,
                     yscrollcommand=poss_scroll_y.set,
                     xscrollcommand=poss_scroll_x.set,)
         poss.pack(fill='x')
@@ -95,7 +96,7 @@ class PreferencesDisplay:
         qual_scroll_x = Scrollbar(qual_table_frame,orient='horizontal')
         qual_scroll_x.pack(side=BOTTOM, fill=X)
 
-        qual = Table(qual_table_frame, height=5,
+        qual = Table(qual_table_frame, height=self.tableHeight,
                     yscrollcommand=qual_scroll_y.set,
                     xscrollcommand=qual_scroll_x.set,)
         qual.pack(fill='x')
