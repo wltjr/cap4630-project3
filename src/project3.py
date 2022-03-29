@@ -3,6 +3,7 @@
 from attributes import *
 from clasp import *
 from hard_constraints import *
+from exemplify_display import *
 from optimal_display import *
 from preferences import *
 from preferences_display import *
@@ -10,6 +11,7 @@ from tasks_display import *
 from tkinter import *
 from tkinter import messagebox as mb
 from tkinter.ttk import Notebook
+import random
 
 class ui:
     """
@@ -107,6 +109,39 @@ class ui:
         self.prefDisplay.clear()
         self.valueLogic(self.preferences.penalties, False)
         self.valueLogic(self.preferences.possibilistics, True)
+
+        self.exmpDisplay.reset()
+
+        obj1 = random.randint(1,self.tasks.count)
+        obj2 = random.randint(1,self.tasks.count)
+        while obj1 == obj2:
+            obj2 = random.randint(1,self.tasks.count)
+
+        preferences1 = [obj1]
+        preferences2 = [obj2]
+        if self.penalties[obj1] == self.penalties[obj2]:
+            preferences1.append("equivalent")
+            preferences2.append("equivalent")
+        elif self.penalties[obj1] < self.penalties[obj2]:
+            preferences1.append("preferred")
+            preferences2.append("")
+        else:
+            preferences1.append("")
+            preferences2.append("preferred")
+
+        if self.possibilistic[obj1] == self.possibilistic[obj2]:
+            preferences1.append("equivalent")
+            preferences2.append("equivalent")
+        elif self.possibilistic[obj1] > self.possibilistic[obj2]:
+            preferences1.append("preferred")
+            preferences2.append("")
+        else:
+            preferences1.append("")
+            preferences2.append("preferred")
+
+        self.exmpDisplay.add(preferences1)
+        self.exmpDisplay.add(preferences2)
+
         self.penalties = dict(sorted(self.penalties.items(),
                                      key=lambda x:x[1]))
         self.possibilistic = dict(sorted(self.possibilistic.items(),
@@ -248,7 +283,10 @@ class ui:
         self.tasks = TasksDisplay(objects_frame)
         self.optimal = OptimalDisplay(objects_frame)
         objects_frame.pack(side=LEFT, padx=5)
-        self.prefDisplay = PreferencesDisplay(tab2)
+        preferences_frame = Frame(tab2)
+        self.prefDisplay = PreferencesDisplay(preferences_frame)
+        self.exmpDisplay = ExemplifyDisplay(preferences_frame)
+        preferences_frame.pack(side=LEFT, padx=(0,5))
 
         # main UI, tables and forms
         group_frame = Frame(frame)
