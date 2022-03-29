@@ -15,7 +15,10 @@ import copy
 import random
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> b2d0b3ee572c9ee1e9dc11d84c35ca258197c7b6
 =======
 >>>>>>> b2d0b3ee572c9ee1e9dc11d84c35ca258197c7b6
 =======
@@ -36,6 +39,14 @@ class ui:
     opt_penal = {}
     opt_possy = {}
     opt_qualit = {}
+
+    penal = {}
+    possy = {}
+    qualit = {}
+    opt_penal = {}
+    opt_possy = {}
+    opt_qualit = {}
+
 
     penal = {}
     possy = {}
