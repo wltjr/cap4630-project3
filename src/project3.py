@@ -262,6 +262,7 @@ class ui:
         attr = self.attributes.attributes
 
         qual_table = []
+        self.opt_qualit = []
 
         for item in self.preferences.qualitatives:
             item = re.split(' ', item)
