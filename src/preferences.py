@@ -232,7 +232,7 @@ class Preferences(InputUI):
                 values = re.split(r'[:,]', line[:-1])
                 self.add(values[0],values[1])
             else:
-                self.add(line,"")
+                self.add(line[:-1],"")
 
 
     def reset(self):
