@@ -1,0 +1,15 @@
+# Penalty Logic
+NOT beef OR salad AND NOT beef OR ice-cream, 9
+NOT fish OR soup AND NOT fish OR cake, 8
+wine OR cake, 6
+
+# Possibilitic Logic
+NOT beef OR salad AND NOT beef OR ice-cream, 0.9
+NOT fish OR soup AND NOT fish OR cake, 0.8
+wine OR cake, 0.6
+
+#Qualitative Choice Logic
+wine AND soup BT beer AND salad IF fish
+beer AND salad BT wine AND soup IF beef
+beef BT fish IF
+soup BT salad IF
