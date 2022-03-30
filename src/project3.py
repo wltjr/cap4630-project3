@@ -20,7 +20,10 @@ class ui:
 
     penalties = {}
     possibilistic = {}
+    qualitative = {}
     solutions = []
+
+    opt_qualit = {}
 
     def getClause(self, string):
         """
@@ -88,6 +91,9 @@ class ui:
 
         self.clasp = clasp
         self.solutions = solutions
+
+        #testing
+        self.qualLogic()
 
         self.notebook.select(self.tab2)
 
@@ -247,6 +253,124 @@ class ui:
                 self.prefDisplay.addPenalty([objNum] + points + [total])
                 self.penalties[objNum] = total
 
+    def qualLogic(self):
+        attr = self.attributes.attributes
+
+        qual_table = []
+
+        for item in self.preferences.qualitatives:
+            item = re.split(' ', item)
+
+            qual_temp = []
+            pref_const = []
+            pref_const2 = []
+
+            for count, x in enumerate(item):
+                if item[count - 1] == "NOT":
+                    try:
+                        index = -(list(attr.keys())
+                                  [list(attr.values()).index(x)])
+                    except ValueError:
+                        continue
+                    pref_const.append(index)
+                elif(x == "AND"):
+                    pref_const2.append(pref_const)
+                    pref_const = []
+                elif(x == "BT"):
+                    pref_const2.append(pref_const)
+                    pref_const = []
+                    pref_const2.append("BT")
+                elif(x == "IF"):
+                    pref_const2.append(pref_const)
+                    pref_const = []
+                    pref_const2.append("IF")
+                elif(x != "OR") and (x != "NOT"):
+                    try:
+                        index = list(attr.keys())[list(attr.values()).index(x)]
+                    except ValueError:
+                        continue
+                    pref_const.append(index)
+
+            pref_const2.append(pref_const)
+
+            for x in self.solutions:
+                qual_countr = 1
+                qual_bool = True
+
+                for y in reversed(pref_const2):
+                    if y == "IF":
+                        if qual_bool == False:
+                            qual_temp.append(float('inf'))
+                        break
+                    if qual_bool == False or len(y) == 0:
+                        continue
+
+                    qual_bool = any(z in x for z in y)
+
+                if qual_bool == False:
+                    continue
+
+                for y in pref_const2:
+                    if y == "IF":
+                        if qual_bool == False:
+                            qual_temp.append(float('inf'))
+                        else:
+                            qual_temp.append(qual_countr)
+                        break
+                    elif y == "BT":
+                        if qual_bool == False:
+                            qual_countr += 1
+                            qual_bool = True
+                            continue
+                        else:
+                            qual_temp.append(qual_countr)
+                            break
+                    if qual_bool == False:
+                        continue
+
+                    qual_bool = any(z in x for z in y)
+            qual_table.append(qual_temp)
+
+        # transposes qualitative list
+        qual_table = list(zip(*qual_table))
+
+        # next three function blocks handles qualitative optimization
+        for x in range(1, len(qual_table) + 1):
+            self.qualitative[x] = qual_table[x-1]
+            self.opt_qualit[x] = 'optimal'
+
+        for x_idx, x in enumerate(qual_table):
+            for y_idx, y in enumerate(qual_table):
+                if x == y:
+                    continue
+                else:
+                    ob1_count = 0
+                    ob2_count = 0
+                    for z, degree in enumerate(qual_table[x_idx]):
+                        if degree == qual_table[y_idx][z]:
+                            continue
+                        if degree < qual_table[y_idx][z]:
+                            ob1_count += 1
+                        else:
+                            ob2_count += 1
+                    if ob1_count > 0 and ob2_count > 0:  # incomparable
+                        continue
+                    elif ob1_count > ob2_count:
+                        self.opt_qualit[y_idx + 1] = 'not optimal'
+                    elif ob2_count < ob2_count:
+                        self.opt_qualit[x_idx + 1] = 'not optimal'
+
+        while(True):
+            if 'not optimal' not in self.opt_qualit.values():
+                break
+            for x in self.opt_qualit:
+                if self.opt_qualit[x] == 'not optimal':
+                    self.opt_qualit.pop(x)
+                    break
+
+        print(self.opt_qualit)
+
+        print(self.qualitative)
 
     def reset(self):
         """
