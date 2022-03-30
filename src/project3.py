@@ -18,12 +18,17 @@ class ui:
     User Interface class displays GUI for the project and is the main class
     """
 
+    obj1 = 0
+    obj2 = 0
+
     penalties = {}
     possibilistic = {}
     qualitative = {}
     solutions = []
 
     opt_qualit = []
+    preferences1 = []
+    preferences2 = []
 
     def getClause(self, string):
         """
@@ -120,6 +125,9 @@ class ui:
         while obj1 == obj2:
             obj2 = random.randint(1,self.tasks.count)
 
+        self.obj1 = obj1 - 1
+        self.obj2 = obj2 - 1
+
         preferences1 = [obj1]
         preferences2 = [obj2]
         if self.penalties[obj1] == self.penalties[obj2]:
@@ -142,10 +150,13 @@ class ui:
             preferences1.append("")
             preferences2.append("preferred")
 
-        self.exmpDisplay.add(preferences1)
-        self.exmpDisplay.add(preferences2)
+        self.preferences1 = preferences1
+        self.preferences2 = preferences2
 
         self.qualLogic()
+
+        self.exmpDisplay.add(self.preferences1)
+        self.exmpDisplay.add(self.preferences2)
 
         self.penalties = dict(sorted(self.penalties.items(),
                                      key=lambda x:x[1]))
@@ -346,28 +357,43 @@ class ui:
             self.qualitative[objNum] = qual_table[objNum-1]
             self.opt_qualit.append(objNum)
 
-        for x_idx, x in enumerate(qual_table):
-            for y_idx, y in enumerate(qual_table):
-                if x == y:
+        for obj_i1, obj1 in enumerate(qual_table):
+            for obj_i2, obj2 in enumerate(qual_table):
+                if self.qualCompare(qual_table, obj_i1, obj_i2, obj1, obj2):
                     continue
-                else:
-                    ob1_count = 0
-                    ob2_count = 0
-                    for z, degree in enumerate(qual_table[x_idx]):
-                        if degree == qual_table[y_idx][z]:
-                            continue
-                        if degree < qual_table[y_idx][z]:
-                            ob1_count += 1
-                        else:
-                            ob2_count += 1
-                    if ob1_count > 0 and ob2_count > 0:  # incomparable
-                        continue
-                    elif ob1_count > ob2_count:
-                        if y_idx + 1 in self.opt_qualit:
-                            self.opt_qualit.remove(y_idx + 1)
-                    elif ob2_count < ob2_count:
-                        if x_idx + 1 in self.opt_qualit:
-                            self.opt_qualit.remove(x_idx + 1)
+
+    def qualCompare(self, qual_table, obj_i1, obj_i2, obj1, obj2):
+        if obj1 == obj2:
+            if obj_i1 == self.obj1 and obj_i2 == self.obj2:
+                self.preferences1.append("equivalent")
+                self.preferences2.append("equivalent")
+            return True
+        ob1_count = 0
+        ob2_count = 0
+        for z, degree in enumerate(qual_table[obj_i1]):
+            if degree == qual_table[obj_i2][z]:
+                continue
+            if degree < qual_table[obj_i2][z]:
+                ob1_count += 1
+            else:
+                ob2_count += 1
+        if ob1_count > 0 and ob2_count > 0:  # incomparable
+            if obj_i1 == self.obj1 and obj_i2 == self.obj2:
+                self.preferences1.append("incomparable")
+                self.preferences2.append("incomparable")
+            return True
+        elif ob1_count > ob2_count:
+            if obj_i1 == self.obj1 and obj_i2 == self.obj2:
+                self.preferences1.append("preferred")
+                self.preferences2.append("")
+            if obj_i2 + 1 in self.opt_qualit:
+                self.opt_qualit.remove(obj_i2 + 1)
+        elif ob2_count > ob1_count:
+            if obj_i1 == self.obj1 and obj_i2 == self.obj2:
+                self.preferences1.append("")
+                self.preferences2.append("preferred")
+            if obj_i1 + 1 in self.opt_qualit:
+                self.opt_qualit.remove(obj_i1 + 1)
 
 
     def reset(self):
