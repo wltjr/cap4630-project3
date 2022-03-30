@@ -23,7 +23,7 @@ class ui:
     qualitative = {}
     solutions = []
 
-    opt_qualit = {}
+    opt_qualit = []
 
     def getClause(self, string):
         """
@@ -180,6 +180,9 @@ class ui:
                 break
             self.optimal.addPossibilistic(self.tasks.objects[key])
 
+        for key in self.opt_qualit:
+            self.optimal.addQualititative(self.tasks.objects[key])
+
 
     def optimize(self):
         """
@@ -200,6 +203,9 @@ class ui:
 
         key = list(self.possibilistic.keys())[0]
         self.optimal.addPossibilistic(self.tasks.objects[key])
+
+        key = self.opt_qualit[0]
+        self.optimal.addQualititative(self.tasks.objects[key])
 
 
     def valueLogic(self, pref_logic, bool):
@@ -337,7 +343,7 @@ class ui:
         for objNum in range(1, len(qual_table) + 1):
             self.prefDisplay.addQualititative([objNum] + list(qual_table[objNum-1]))
             self.qualitative[objNum] = qual_table[objNum-1]
-            self.opt_qualit[objNum] = 'optimal'
+            self.opt_qualit.append(objNum)
 
         for x_idx, x in enumerate(qual_table):
             for y_idx, y in enumerate(qual_table):
@@ -356,19 +362,11 @@ class ui:
                     if ob1_count > 0 and ob2_count > 0:  # incomparable
                         continue
                     elif ob1_count > ob2_count:
-                        self.opt_qualit[y_idx + 1] = 'not optimal'
+                        if y_idx + 1 in self.opt_qualit:
+                            self.opt_qualit.remove(y_idx + 1)
                     elif ob2_count < ob2_count:
-                        self.opt_qualit[x_idx + 1] = 'not optimal'
-
-        while(True):
-            if 'not optimal' not in self.opt_qualit.values():
-                break
-            for x in self.opt_qualit:
-                if self.opt_qualit[x] == 'not optimal':
-                    self.opt_qualit.pop(x)
-                    break
-
-        print(self.opt_qualit)
+                        if x_idx + 1 in self.opt_qualit:
+                            self.opt_qualit.remove(x_idx + 1)
 
 
     def reset(self):
