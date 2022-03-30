@@ -334,9 +334,10 @@ class ui:
         qual_table = list(zip(*qual_table))
 
         # next three function blocks handles qualitative optimization
-        for x in range(1, len(qual_table) + 1):
-            self.qualitative[x] = qual_table[x-1]
-            self.opt_qualit[x] = 'optimal'
+        for objNum in range(1, len(qual_table) + 1):
+            self.prefDisplay.addQualititative([objNum] + list(qual_table[objNum-1]))
+            self.qualitative[objNum] = qual_table[objNum-1]
+            self.opt_qualit[objNum] = 'optimal'
 
         for x_idx, x in enumerate(qual_table):
             for y_idx, y in enumerate(qual_table):
@@ -369,7 +370,6 @@ class ui:
 
         print(self.opt_qualit)
 
-        print(self.qualitative)
 
     def reset(self):
         """
