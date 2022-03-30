@@ -92,9 +92,6 @@ class ui:
         self.clasp = clasp
         self.solutions = solutions
 
-        #testing
-        self.qualLogic()
-
         self.notebook.select(self.tab2)
 
 
@@ -147,6 +144,8 @@ class ui:
 
         self.exmpDisplay.add(preferences1)
         self.exmpDisplay.add(preferences2)
+
+        self.qualLogic()
 
         self.penalties = dict(sorted(self.penalties.items(),
                                      key=lambda x:x[1]))
