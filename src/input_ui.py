@@ -14,6 +14,8 @@ class InputUI(ABC):
         """
         Open file selection dialog, base implementation to be called and
         extended by base classes
+
+        :return the opened file handle, or None if an exception occurs
         """
         filename = fd.askopenfilename(initialdir="../files/",
                                       title=("Select "+self.__class__.__name__+ " File"))
@@ -35,8 +37,15 @@ class InputUI(ABC):
 
     @abstractmethod
     def openFileCallback(self):
+        """
+        Abstract file open callback method to be implemented and used by
+        derived classes
+        """
         pass
 
     @abstractmethod
     def reset(self):
+        """
+        Abstract reset method to be implemented and used by derived classes
+        """
         pass
