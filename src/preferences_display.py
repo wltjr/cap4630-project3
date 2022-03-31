@@ -44,7 +44,7 @@ class PreferencesDisplay:
         pen_scroll_x = Scrollbar(pen_table_frame,orient='horizontal')
         pen_scroll_x.pack(side=BOTTOM, fill=X)
 
-        pen = Table(pen_table_frame, height=self.tableHeight,
+        pen = Table(pen_table_frame, height=self.tableHeight+1,
                     yscrollcommand=pen_scroll_y.set,
                     xscrollcommand=pen_scroll_x.set,)
         pen.pack(fill='x')
