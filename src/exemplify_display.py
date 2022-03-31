@@ -59,11 +59,20 @@ class ExemplifyDisplay:
         self.exp = exp
 
     def add(self, valuesList):
+        """
+        Add an attribute to table from a list of values, one for each column
+        in the table
+
+        :param valuesList a list of values one for each column in the table
+        """
         self.count += 1
         self.exp.insert(parent='',index='end',iid=self.count-1,text='',
                        values=(valuesList))
 
     def reset(self):
+        """
+        Reset table and count variable
+        """
         self.count = 0
         self.exp.clear()
 
