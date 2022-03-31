@@ -97,9 +97,6 @@ class HardConstraints(InputUI):
         if file == None:
             return
 
-        self.count = 0
-        self.hc.clear()
-
         for line in file:
             if line[0] == '\n' or line[0] == '#':
                 continue
