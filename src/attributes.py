@@ -30,6 +30,13 @@ class Attributes(InputUI):
         return self.attributes[key]
 
     def addAttribute(self, attribute, option1, option2):
+        """
+        Add attribute to data structure and table
+
+        :param attribute the attribute name
+        :param option1 attribute option 1 value
+        :param option attribute option 2 value
+        """
         self.count += 1
         self.attributes[self.count] = option1
         self.attributes[-self.count] = option2
@@ -62,6 +69,9 @@ class Attributes(InputUI):
 
 
     def openFileCallback(self):
+        """
+        Method called from button to open file from dialog
+        """
         file = super().openFile()
 
         if file == None:
@@ -153,6 +163,9 @@ class Attributes(InputUI):
         open_file.pack(side=LEFT, padx=5, pady=5)
 
     def reset(self):
+        """
+        Reset table, count variable and data structure
+        """
         self.count = 0
         self.attr.clear()
         self.attributes = {}
