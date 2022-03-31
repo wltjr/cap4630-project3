@@ -12,9 +12,9 @@ class HardConstraints(InputUI):
 
     def __init__(self, root):
         """
-        Creates an initial GUI to display attributes and instantiates the class
+        Creates an initial GUI to display hard constraints and instantiates the class
 
-        :param root tk root window
+        :param root tk root window or frame
         """
         self.count = 0
         self.constraints = []
@@ -72,6 +72,11 @@ class HardConstraints(InputUI):
         open_file.pack(side=LEFT, padx=5, pady=5)
 
     def add(self, constraint):
+        """
+        Add a hard constraint to data structure and table
+
+        :param constraint the hard constraint
+        """
         self.count += 1
         self.constraints.append(constraint)
         self.hc.insert(parent='',index='end',iid=self.count-1,text='',
@@ -92,6 +97,9 @@ class HardConstraints(InputUI):
 
 
     def openFileCallback(self):
+        """
+        Method called from button to open file from dialog
+        """
         file = super().openFile()
 
         if file == None:
@@ -104,6 +112,9 @@ class HardConstraints(InputUI):
 
 
     def reset(self):
+        """
+        Reset table, count variable and data structure
+        """
         self.count = 0
         self.hc.clear()
         self.constraints = []
