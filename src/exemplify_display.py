@@ -33,7 +33,7 @@ class ExemplifyDisplay:
         exp_scroll_x = Scrollbar(exp_table_frame,orient='horizontal')
         exp_scroll_x.pack(side=BOTTOM,fill=X)
 
-        exp = Table(exp_table_frame, height=5,
+        exp = Table(exp_table_frame, height=4,
                    yscrollcommand=exp_scroll_y.set,
                    xscrollcommand =exp_scroll_x.set)
         exp.pack(fill='x')
