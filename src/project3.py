@@ -269,7 +269,12 @@ class ui:
                 self.prefDisplay.addPenalty([objNum] + points + [total])
                 self.penalties[objNum] = total
 
+
     def qualLogic(self):
+        """
+        Performs qualitative logic and populates exemplification and optimal
+        data structures for qualitative logic
+        """
         attr = self.attributes.attributes
 
         qual_table = []
@@ -362,7 +367,19 @@ class ui:
                 if self.qualCompare(qual_table, obj_i1, obj_i2, obj1, obj2):
                     continue
 
+
     def qualCompare(self, qual_table, obj_i1, obj_i2, obj1, obj2):
+        """
+        Performs qualitative logic comparison on two objects, used for both
+        exemplification and optimization, and data for the qualitative logic
+        output table
+        
+        :qual_table internal local table/list of objects qualitative values
+        :obj_i1 object 1 index value, the number of object 1 in the objects list
+        :obj_i2 object 2 index value, the number of object 2 in the objects list
+        :obj1 object 1 qualitative values
+        :obj2 object 2 qualitative values
+        """
         if obj1 == obj2:
             if obj_i1 == self.obj1 and obj_i2 == self.obj2:
                 self.preferences1.append("equivalent")
