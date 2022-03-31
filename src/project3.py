@@ -430,7 +430,7 @@ class ui:
         Run the GUI create the root window, frames, and all GUI widgets
         """
         root = Tk()
-        root.title('Project 3')
+        root.title("Project 3 - Knowledge-based Intelligent System")
 
         notebook = Notebook(root)
         
