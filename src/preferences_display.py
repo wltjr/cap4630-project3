@@ -107,6 +107,7 @@ class PreferencesDisplay:
         self.qual = qual
         self.addQualitativeColumn(0)
 
+
     def clear(self):
         """
         Clear all tables and reset count variables
@@ -118,22 +119,52 @@ class PreferencesDisplay:
         self.poss.clear()
         self.qual.clear()
 
+
     def reset(self):
+        """
+        Reset all tables, count variables and columns
+        """
         self.clear()
         self.addPenaltyColumn(0)
         self.addPossibiliticColumn(0)
         self.addQualitativeColumn(0)
 
+
     def addPenaltyColumn(self, number):
+        """
+        Add a preference column to the penalty table
+
+        :param number the penalty preference number for the new column header
+        """
         self.addColumn(self.pen, True, number)
 
+
     def addPossibiliticColumn(self, number):
+        """
+        Add a preference column to the possibilitic table
+
+        :param number the possibilitic preference number for the new column header
+        """
         self.addColumn(self.poss, True, number)
 
+
     def addQualitativeColumn(self, number):
+        """
+        Add a preference column to the qualitative table
+
+        :param number the qualitative preference number for the new column header
+        """
         self.addColumn(self.qual, False, number)
 
+
     def addColumn(self, table, hasTotal, number):
+        """
+        Generic method to add a preference column to the specified table
+
+        :param table the table to add the new column
+        :param hasTotal boolean if the table should have a total column
+        :param number the preference number for the new column header
+        """
         if number > 0:
             prefNumber = "pref" + str(number)
             table['columns'] = tuple(sorted(list(table['columns']) + [prefNumber]))
@@ -160,6 +191,12 @@ class PreferencesDisplay:
 
 
     def addPenalty(self, valuesList):
+        """
+        Add an attribute to the penalty table from a list of values, one 
+        for each column in the table
+
+        :param valuesList a list of values one for each column in the table
+        """
         self.pen_count += 1
         self.penalties.append(valuesList)
         self.pen.insert(parent='',index='end',iid=self.pen_count-1,text='',
@@ -167,6 +204,12 @@ class PreferencesDisplay:
 
 
     def addPossibilistic(self, valuesList):
+        """
+        Add an attribute to the possibilitic table from a list of values, one 
+        for each column in the table
+
+        :param valuesList a list of values one for each column in the table
+        """
         self.poss_count += 1
         self.possibilistics.append(valuesList)
         self.poss.insert(parent='',index='end',iid=self.poss_count-1,text='',
@@ -174,6 +217,12 @@ class PreferencesDisplay:
                         
 
     def addQualititative(self, valuesList):
+        """
+        Add an attribute to the qualitative table from a list of values, one 
+        for each column in the table
+
+        :param valuesList a list of values one for each column in the table
+        """
         self.qual_count += 1
         self.qualitatives.append(valuesList)
         self.qual.insert(parent='',index='end',iid=self.qual_count-1,text='',
