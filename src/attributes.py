@@ -67,9 +67,6 @@ class Attributes(InputUI):
         if file == None:
             return
 
-        self.count = 0
-        self.attr.clear()
-
         for line in file:
             if line[0] == '\n' or line[0] == '#':
                 continue
