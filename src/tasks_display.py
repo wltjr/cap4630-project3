@@ -59,6 +59,12 @@ class TasksDisplay:
         self.td = td
 
     def add(self, clasp, object):
+        """
+        Add an object to table and update label on count of objects
+
+        :param clasp a representation of the object in clasp format
+        :param object a representation of the object in human readable format
+        """
         self.count += 1
         self.objects[self.count] = [self.count, clasp, object]
         self.td.insert(parent='',index='end',iid=self.count-1,text='',
@@ -66,6 +72,9 @@ class TasksDisplay:
         self.td_label.config(text=str(self.count)+self.defaultFeasibleLabel[1:])
 
     def clearTable(self):
+        """
+        Clear/reset table, count variable and label
+        """
         self.td_label.config(text=self.defaultFeasibleLabel)
         self.count = 0
         self.td.clear()
