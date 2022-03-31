@@ -1,0 +1,81 @@
+For testing purposes, our team used three different sets or instances
+of attributes, constraints, and preferences. All files used for testing are
+in the files directory.
+
+
+The main test instance used for submission is in the files ending with _test.txt
+attributes_test.txt, hard_constraints_test.txt, and preferences_test.txt
+
+Test Attributes:
+The attributes represent possible choices a person might have to make when
+looking for a vehicle to purchase, rent, etc. These attributes are based on some
+binary comparisons a person might make, like gas vs electric, or similar.
+
+- Doors represents a choice over vehicles two or four doors.
+- Engine represents a choice over the type of engine either gas or electric
+- Drive represents a choice over the amount of driving wheel, all wheels or two
+- Interior represents a choice over the type of interior leather or cloth
+- Transmission represents a choice over the type of transmission manual or auto
+- Top-style represents a choice over roof material of a vehicle hard or soft
+- Type represents a choice over the type of vehicle truck or car
+- Stereo represents a choice over the type of stereo xm or fm/am
+
+Test Hard Constraints:
+The hard constraints represent a person’s fixed requirements beyond other
+optional preferences they might have when deciding on a vehicle. These would be
+non-negotiable and apply to all preferences. Some combinations of attributes
+cannot be combined, and the hard constraints prevent such combinations
+for things that are not possible like a manual transmission in an electric
+vehicle. If a vehicle does not meet the requirements of the hard constraints,
+it is not considered.
+
+- Not electric or not manual means only gas vehicles can have a manual
+  transmission and an electric vehicle can only have an automatic transmission
+- Not soft or not truck means trucks are not available with soft tops only cars
+- Not two or not truck means only two door trucks are considered not four doors
+  trucks, even though they do make four door trucks
+- Not manual or not xm is a made-up constraint that only manual vehicles can
+  have a fm/am radio and cannot have an xm radio
+- Not electric or not cloth is another made up constraint that electric
+  vehicles are only offered with leather interior not cloth
+- Not truck or not electric is another made up constraint that trucks
+  cannot be electric, or if electric, only cars are considered
+
+Test Preferences:
+The preferences for penalty, possibilistic, and qualitative represent things
+a person might prefer in their choice of vehicles. These are choices that
+might make one vehicle more attractive than another, or another less
+desirable based on various amenities or features of each vehicle.
+
+Penalty:
+- Assign a penalty to four door cars
+- Assign a penalty to vehicles with leather interior and xm radios
+- Assign a penalty to manual transmission or trucks
+- Assign a penalty to two door or two-wheel drive vehicles
+- Assign a penalty to manual transmission with soft tops
+- Assign a penalty to cars with automatic transmissions
+
+Possibilistic:
+- Assign a tolerance to four door cars
+- Assign a tolerance to vehicles with leather interior and xm radios
+- Assign a tolerance to manual transmission or trucks
+- Assign a tolerance to two door or two-wheel drive vehicles
+- Assign a tolerance to manual transmission with soft tops
+- Assign a tolerance to cars with automatic transmissions
+
+Qualitative:
+- Electric vehicles are better than gas vehicles if the vehicle is a car
+- Four door vehicles are better than two door vehicles if the vehicle is a car
+- Manual transmission or trucks are better than cars with manual transmission
+- fm/am radios are better than xm radios if the vehicle is a truck
+- xm is better than fm/am if the vehicle is a car
+- All wheel drive is better than two-wheel drive if the vehicle is a truck
+
+
+The other two sets of test cases were based on the attributes, constraints,
+and preferences in the project description, and from homework one. Those
+were all based on meal selection and have slight variances in attributes,
+constraints, and preferences. Those were used for validation of results, as
+we were able to compare the results using our homework against the
+attributes, constraints, and preferences in the files ending with _hw.txt.
+The other set of files ending in 1.txt were from the project description.
