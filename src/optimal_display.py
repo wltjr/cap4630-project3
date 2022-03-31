@@ -58,8 +58,8 @@ class OptimalDisplay:
         pen['columns']= ('number', 'clasp', 'object')
         pen.column("#0", width=0,  stretch=NO)
         pen.column("number",anchor=CENTER, width=40)
-        pen.column("clasp",anchor=CENTER, width=80)
-        pen.column("object",anchor=CENTER, width=310)
+        pen.column("clasp",anchor=CENTER, width=110)
+        pen.column("object",anchor=CENTER, width=280)
 
         # Optimal Penalty Objects Headings
         pen.heading("#0",text="",anchor=CENTER)
@@ -98,8 +98,8 @@ class OptimalDisplay:
         poss['columns']= ('number', 'clasp', 'object')
         poss.column("#0", width=0,  stretch=NO)
         poss.column("number",anchor=CENTER, width=40)
-        poss.column("clasp",anchor=CENTER, width=80)
-        poss.column("object",anchor=CENTER, width=310)
+        poss.column("clasp",anchor=CENTER, width=110)
+        poss.column("object",anchor=CENTER, width=280)
 
         # Optimal Possibilistic Objects Headings
         poss.heading("#0",text="",anchor=CENTER)
@@ -139,8 +139,8 @@ class OptimalDisplay:
         qual['columns']= ('number', 'clasp', 'object')
         qual.column("#0", width=0,  stretch=NO)
         qual.column("number",anchor=CENTER, width=40)
-        qual.column("clasp",anchor=CENTER, width=80)
-        qual.column("object",anchor=CENTER, width=310)
+        qual.column("clasp",anchor=CENTER, width=110)
+        qual.column("object",anchor=CENTER, width=280)
 
         # Optimal Qualitative Objects Headings
         qual.heading("#0",text="",anchor=CENTER)
