@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from abc import ABC, abstractmethod
+from os import path
 from tkinter import filedialog as fd
 from tkinter import messagebox as mb
 
@@ -17,7 +18,13 @@ class InputUI(ABC):
 
         :return the opened file handle, or None if an exception occurs
         """
-        filename = fd.askopenfilename(initialdir="../files/",
+        initialdir = "."
+        if path.isdir("files"):
+            initialdir = "files"
+        elif path.isdir("../files"):
+            initialdir = "../files"
+        filename = fd.askopenfilename(filetypes=[("Text files","*.txt")],
+                                      initialdir=initialdir,
                                       title=("Select "+self.__class__.__name__+ " File"))
 
         if filename == () or filename == "":
