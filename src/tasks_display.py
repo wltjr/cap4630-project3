@@ -47,8 +47,8 @@ class TasksDisplay:
         td['columns']= ('number', 'clasp', 'object')
         td.column("#0", width=0,  stretch=NO)
         td.column("number",anchor=CENTER, width=40)
-        td.column("clasp",anchor=CENTER, width=80)
-        td.column("object",anchor=CENTER, width=310)
+        td.column("clasp",anchor=CENTER, width=110)
+        td.column("object",anchor=CENTER, width=280)
 
         # Feasible Objects Headings
         td.heading("#0",text="",anchor=CENTER)
