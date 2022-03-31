@@ -28,9 +28,15 @@ class InputUI(ABC):
                          "The file %s was not found, aborting." % filename)
             return
 
+        self.reset()
+
         self.filename = filename
         return file
 
     @abstractmethod
     def openFileCallback(self):
+        pass
+
+    @abstractmethod
+    def reset(self):
         pass
