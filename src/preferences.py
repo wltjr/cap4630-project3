@@ -168,6 +168,13 @@ class Preferences(InputUI):
 
 
     def add(self, preference, value):
+        """
+        Add preference to the proper data structure and table based on presence
+        and type of the value
+
+        :param preference the preference to add
+        :param value the preference penalty or tolerance value if any
+        """
         # no value, qualitative logic
         if value == "":
             self.qual_count += 1
@@ -218,6 +225,9 @@ class Preferences(InputUI):
 
 
     def openFileCallback(self):
+        """
+        Method called from button to open file from dialog
+        """
         file = super().openFile()
 
         if file == None:
@@ -234,6 +244,9 @@ class Preferences(InputUI):
 
 
     def reset(self):
+        """
+        Reset all tables, count variables and data structures
+        """
         self.clear()
         self.penalties = []
         self.possibilistics = []
