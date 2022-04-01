@@ -430,10 +430,11 @@ class ui:
         Run the GUI create the root window, frames, and all GUI widgets
         """
         root = Tk()
+        root.resizable(False, False)
         root.title("Project 3 - Knowledge-based Intelligent System")
 
         notebook = Notebook(root)
-        
+
         tab1 = Frame(notebook)
         tab2 = Frame(notebook)
 
