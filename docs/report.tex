@@ -99,7 +99,7 @@ Also like optimization, In the event neither feasible objects or exemplification
 
 \newpage
 \section{Operation}
-The program is a GUI that is started from a terminal. All that is need to run the program is to have the necessary system requirements, Python $\geq$ 3.9, Tkinter $\geq$ 8.6, Tcl/TK $\geq$ 8.6, and clasp $\geq$ 3.2. The clasp binary must be available via the system PATH variable. To start the program navigate to the directory it was unpacked in and run the following command(s).
+The program is a GUI that is started from a terminal. All that is need to run the program is to have the necessary system requirements, Python $\geq$ 3.9, Tkinter $\geq$ 8.6, Tcl/TK $\geq$ 8.6, and clasp $\geq$ 3.2. The clasp binary must be available via the system PATH variable. To start the program navigate to the directory it was unpacked into, or the src directory, and run the following command(s).
 
 \begin{figure}[H]
 \begin{center}
@@ -138,7 +138,9 @@ The first required program input are the binary attributes. The program requires
 The second required program input are the hard constraints. The program requires at least one or more hard constraints to function. Hard constraints can be entered in one by one, or in bulk via a file upload, which is recommended. Additional hard constraints can be entered directly in addition to those loaded from a file.
 
 \section{Preference Logics}
-The third and final required program input are the preference logics: penalty logic, possibilistic logic, and qualitative choice logic. The program requires at least one or more preference logics for each of the three types to function. Preference logics can be entered in one by one, or in bulk via a file upload, which is recommended. Additional preference logics can be entered directly in addition to those loaded from a file. The type of logic will be automatically determined based on the value, if one exists, which it does not for qualitative choice logic.
+The third and final required program input are the preference logics: penalty logic, possibilistic logic, and qualitative choice logic. The program requires at least one or more preference logics for each of the three types to function. Preference logics can be entered in one by one, or in bulk via a file upload, which is recommended. Additional preference logics can be entered directly in addition to those loaded from a file. The type of logic will be automatically determined based on the value, if one exists, which it does not for qualitative choice logic.\\
+
+When preferences are added, the related preference logic table columns will be dynamically updated to reflect the number of preferences, with each preference column on the output relating to the preference number on the input tab.
 
 \section{Input Steps and Screenshots}
 The following pages contain steps and screenshots showing how to input attributes (names and values), hard constraints, and preference logics from a file into the program. Manual input is not covered, but is only a matter of entering in the information into text fields and pressing the related add buttons.
@@ -269,6 +271,7 @@ Repetitive clicks of the existence button will always generate the same output i
 \vspace{.75em}
 The following steps demonstrate the exemplification functionality of the program. \\
 Comparing two random feasible objects based on each of the three preference logics.\\
+The dynamic pref number columns in the three preference logic tables refer to preference numbers assigned on the input tab.\\
 
 \begin{description}[leftmargin=4em]
 \item [Step 1:] Click the \textbf{"Exemplify"} button
