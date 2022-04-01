@@ -5,6 +5,7 @@ Intelligent System \\ Project 3 - Report}}
     \date{April 1st, 2022}
 
     \addtolength{\textheight}{3cm}
+	\usepackage{enumitem}
     \usepackage{graphicx}
     \usepackage{hyperref}
     \usepackage[tmargin=1in,lmargin=1in,rmargin=1in]{geometry}
@@ -17,6 +18,10 @@ Intelligent System \\ Project 3 - Report}}
     \setlength{\tindent}{\parindent}
     \setlength{\parindent}{0pt}
     \renewcommand{\indent}{\hspace*{\tindent}}
+
+    \setlist[description]{noitemsep, topsep=0pt, itemsep=.5em}
+    \setlist[enumerate]{noitemsep, topsep=0pt, itemsep=.5em}
+    \setlist[itemize]{noitemsep, topsep=0pt, itemsep=.5em}
 
     \titleformat{\chapter}
 	{\Large\bfseries}
@@ -35,9 +40,21 @@ Intelligent System \\ Project 3 - Report}}
 \tableofcontents
 \thispagestyle{empty}
 
-\chapter{Introduction}
-The purpose of our program is to collect names of attributes, values of attributes, hard constraints, and preferences for the reason of performing four reasoning tasks: Existence of feasible objects, exemplification, optimization, and omni-optimization.
-\newpage
+\chapter{Overview}
+\section{About}
+This program is a knowledge-based intelligent system that collects user preferences and reasons about them. The program collects names of attributes, values of attributes ($A$), hard constraints represented as propositional formulas in conjunctive normal form (CNF) ($H$), and preferences languages of penalty logic, possibilistic logic, and qualitative choice logic with preference formulas ($T$) also in conjunctive normal form (CNF) from user input or files with the purpose of performing the following four reasoning tasks: \\
+
+\begin{description}[style=multiline,leftmargin=12em]
+  \item [Existence of Feasible Objects] Whether there are feasible objects w.r.t $H$,
+that is, whether there are models of $H$ that are truth assignments making $H$ true.
+  \item [Exemplification] Generate two random feasible objects, and show the preference between the two (strict preference or equivalence) w.r.t $T$
+  \item [Optimization] Find an optimal object w.r.t $T$
+  \item [Omni-Optimization] Find all optimal objects w.r.t $T$
+\end{description}
+
+\section{Design}
+The program is written in Python and leverages the Tkinter python binding to TK GUI toolkit, used for the GUI of the program. The underlying logic is mostly performed with the use of clasp, an answer set solver for normal and disjunctive logic programs. The program wraps the clasp binary and uses it to perform tasks such as existence of feasible objects and for penalty and possibilistic preference logics. Qualitative choice logic is performed internally in the programs code without the use of clasp.
+
 
 \chapter{Input}
 Using a GUI written in Python (using Tkinter framework), input is taken through either the text input boxes or file input buttons.
