@@ -6,10 +6,19 @@ Intelligent System \\ Project 3 - Report}}
 
     \addtolength{\textheight}{3cm}
 	\usepackage{enumitem}
-    \usepackage{graphicx}
     \usepackage{hyperref}
+    \usepackage{float}
+    \usepackage{graphicx}
+    \usepackage{subcaption}
     \usepackage[tmargin=1in,lmargin=1in,rmargin=1in]{geometry}
 	\usepackage{titlesec}
+	
+    \DeclareCaptionFormat{custom}
+    {%
+        \textbf{\footnotesize #1#2}\textit{\footnotesize #3}
+    }
+    \captionsetup{format=custom}
+
     \graphicspath{ {./assets/} }
 
 	\hypersetup{ colorlinks=true, linkcolor=blue, filecolor=purple, urlcolor=cyan }
@@ -31,8 +40,13 @@ Intelligent System \\ Project 3 - Report}}
 	{\large\bfseries}
 	{\thesection.}{0.5em}{}
 
+	\titleformat{\subsection}
+	{\normalsize\bfseries}
+	{\thesubsection.}{0.5em}{}
+
     \titlespacing\chapter{0pt}{12pt plus 0pt minus 4pt}{0pt plus 0pt minus 4pt}
     \titlespacing\section{0pt}{12pt plus 4pt minus 8pt}{0pt plus 2pt minus 8pt}
+    \titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 
 \begin{document}
 
@@ -53,41 +67,113 @@ that is, whether there are models of $H$ that are truth assignments making $H$ t
 \end{description}
 
 \section{Design}
-The program is written in Python and leverages the Tkinter python binding to TK GUI toolkit, used for the GUI of the program. The underlying logic is mostly performed with the use of clasp, an answer set solver for normal and disjunctive logic programs. The program wraps the clasp binary and uses it to perform tasks such as existence of feasible objects and for penalty and possibilistic preference logics. Qualitative choice logic is performed internally in the programs code without the use of clasp.
+The program is written in Python and leverages the Tkinter python binding to TK GUI toolkit, used for the GUI of the program. The belowlying logic is mostly performed with the use of clasp, an answer set solver for normal and disjunctive logic programs. The program wraps the clasp binary and uses it to perform tasks such as existence of feasible objects and for penalty and possibilistic preference logics. Qualitative choice logic is performed internally in the programs code without the use of clasp.
 
 
 \chapter{Input}
-Using a GUI written in Python (using Tkinter framework), input is taken through either the text input boxes or file input buttons.
+The program relies upon user input for all functionality, either from direct user input via text input form fields and the add buttons, or by file upload of properly formatted files using the open file buttons, or a combination of user input and file upload. Without such input, the program will not function, and it will prompt the user for missing attributes, hard constraints, and/or preferences before performing any of the intended functions. All input and related actions are performed under the input tab.
 
-\addtolength{\itemindent}{0.80cm}
-\itemsep0em
 \section{Binary Attributes}
-Step 1: Follow steps in the README to start the program\\
-\includegraphics[scale=0.3]{input_start} \\\\
-Step 2: Click the "Open File" button under Binary Attributes\\
-\includegraphics[scale=0.3]{input_attributes}\newpage
-Step 3: Select your desired file (attributes$\_$test.txt for this example) and click "Open".\\
-\includegraphics[scale=0.3]{select_attributes}\\
-The contents of the file will be displayed under Binary Attributes.\\
-\includegraphics[scale=0.3]{attributes_imported}
+The first required input are the binary attributes. The program requires at least one or more binary attributes to function. Binary attributes can be entered in one by one, or in bulk via a file upload, which is recommended. Additional attributes can be entered directly in addition to those loaded from a file.
+
 \newpage
+\subsection{Input Binary Attributes from a File}
+The following steps are based on using the open file method of inputting attributes.\\
+
+\begin{description}[leftmargin=4em]
+\item [Step 1:] Click the \textbf{"Open File"} button below the Binary Attributes table
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.275,trim=1cm 1cm 1cm 1cm]{input_attributes}
+\caption{Screenshot of selecting attributes from a file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Step 2:] Select the desired file (attributes$\_$test.txt for this example) and click \textbf{"Open"}.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{select_attributes}
+\caption{Screenshot of selecting a attributes text file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Result:] The contents of the file will be displayed in the \textbf{Binary Attributes table}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.275,trim=1cm 1cm 1cm 1cm]{attributes_imported}
+\caption{Screenshot of attributes loaded from file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\end{description}
 
 \section{Hard Constraints}
-Step 1: Click the "Open File" button under Hard Constraints\\
-\includegraphics[scale=0.3]{input_constraints} \\\\
-Step 2: Select your desired file (hard$\_$constraints$\_$test.txt for this example) and click "Open".\\
-\includegraphics[scale=0.3]{select_constraints}\\
-Step 3: The contents of the file will be displayed under Hard Constraints.\\
-\includegraphics[scale=0.3]{constraints_imported}\\
+The second required input are the hard constraints. The program requires at least one or more hard constraints to function. Hard constraints can be entered in one by one, or in bulk via a file upload, which is recommended. Additional hard constraints can be entered directly in addition to those loaded from a file.
 
-\section{Logics}
-Step 1: Click the "Open File" button under the three logics\\
-\includegraphics[scale=0.3]{input_preferences} \\\\
-Step 2: Select your desired file (preferences$\_$test.txt for this example) and click "Open".\\
-\includegraphics[scale=0.3]{select_preferences}\\
-Step 3: The contents of the file will be displayed in the three.\\
-\includegraphics[scale=0.3]{preferences_imported}
 \newpage
+\subsection{Input Hard Constraints from a File}
+The following steps are based on using the open file method of inputting hard constraints.\\
+
+\begin{description}[leftmargin=4em]
+\item [Step 1:] Click the \textbf{"Open File"} button below the Hard Constraints table
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.275,trim=1cm 1cm 1cm 1cm]{input_constraints}
+\caption{Screenshot of selecting hard constraints from a file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Step 2:] Select the desired file (hard$\_$constraints$\_$test.txt for this example) and \textbf{"Open"}.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{select_constraints}
+\caption{Screenshot of selecting a hard constraints text file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Result:] The contents of the file will be displayed in the the \textbf{Hard Constraints table}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.275,trim=1cm 1cm 1cm 1cm]{constraints_imported}
+\caption{Screenshot of hard constraints loaded from file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\end{description}
+
+\section{Preference Logics}
+The third and final required input are the preference logics: penalty logic, possibilistic logic, and qualitative choice logic. The program requires at least one or more preference logics for each of the three types to function. Preference logics can be entered in one by one, or in bulk via a file upload, which is recommended. Additional preference logics can be entered directly in addition to those loaded from a file. The type of logic will be automatically determined based on the value, if one exists, which it does not for qualitative choice logic.
+
+\newpage
+\subsection{Input Preference Logics from a File}
+The following steps are based on using the open file method of inputting preference logics.\\
+
+\begin{description}[leftmargin=4em]
+\item [Step 1:] Click the \textbf{"Open File"} button below the three Preference Logics tables
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.275,trim=1cm 1cm 1cm 1cm]{input_preferences}
+\caption{Screenshot of selecting preference logics from a file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Step 2:] Select the desired file (preferences$\_$test.txt for this example) and click \textbf{"Open"}.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{select_preferences}
+\caption{Screenshot of selecting a preference logics text file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Result:] The contents of the file will be displayed in the \textbf{three Preference Logics tables}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.275,trim=1cm 1cm 1cm 1cm]{preferences_imported}
+\caption{Screenshot of preference logics loaded from file}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\end{description}
 
 \chapter{Output}
 \section{Existence of Feasible Objects} Click the "Existence" button\\
