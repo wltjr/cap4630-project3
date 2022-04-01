@@ -97,6 +97,37 @@ Like optimization, with the work having been already done, omni-optimization ret
 
 Also like optimization, In the event neither feasible objects or exemplification function has been run, omni-optimization will invoke exemplification function which in turn invokes feasible object function to ensure the necessary data structures have been populated for the omni-optimization functionality. 
 
+\newpage
+\section{Operation}
+The program is a GUI that is started from a terminal. All that is need to run the program is to have the necessary system requirements, Python $\geq$ 3.9, Tkinter $\geq$ 8.6, Tcl/TK $\geq$ 8.6, and clasp $\geq$ 3.2. The clasp binary must be available via the system PATH variable. To start the program navigate to the directory it was unpacked in and run the following command(s).
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{start_program}
+\caption{Screenshot of starting the program from a terminal}
+\end{center}
+\end{figure}
+
+\subsection{Program Start}
+Once started you will see the following window appear with input and output tabs.
+
+\begin{multicols}{2}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.25,trim=1cm 1cm 1cm 1cm]{input_start}
+\caption{Screenshot of initial input tab}
+\end{center}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.25,trim=1cm 1cm 1cm 1cm]{output_start}
+\caption{Screenshot of initial output tab}
+\end{center}
+\end{figure}
+\end{multicols}
+
+The following chapters and sections cover inputting data into the program, generating, and viewing the output.
+
 \chapter{Input}
 The program relies upon user input for all functionality, either from direct user input via text input form fields and the add buttons, or by file upload of properly formatted files using the open file buttons, or a combination of user input and file upload. Without such input, the program will not function, and it will prompt the user for missing attributes, hard constraints, and/or preferences before performing any of the intended functions. All input and related actions are performed under the input tab.
 
