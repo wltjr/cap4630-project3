@@ -175,29 +175,110 @@ The following steps are based on using the open file method of inputting prefere
 \vspace{-2.5em}
 \end{description}
 
+
 \chapter{Output}
-\section{Existence of Feasible Objects} Click the "Existence" button\\
-\includegraphics[scale=0.3]{existence}\\
-All feasible objects, as well as a count of the total number of them, have been generated inside the "Feasible Objects" window.\\
-\includegraphics[scale=0.3]{post_existence}
-\newpage
+\section{Existence of Feasible Objects}
+The following steps demonstrate the existence of feasible objects functionality of the program.\\
 
-\section{Exemplify} Click the "Exemplify" button\\
-\includegraphics[scale=0.3]{exemplify}\\
-The Penalty, Possiblistic, and Qualitative Logic tables have been generated. The exemplification table shows which objects are prefered for each logic.\\
-\includegraphics[scale=0.3]{post_exemplify}
-\newpage
+\begin{description}[leftmargin=4em]
+\item [Step 1:] Click the \textbf{"Existence"} button
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{existence}
+\caption{Screenshot of clicking the existence button}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Result:] All feasible objects will be displayed in the \textbf{feasible objects table} on the output tab, along with the total number of feasible objects. The output tab will be auto-focused on button click if on input tab when the button is clicked.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.275,trim=1cm 1cm 1cm 1cm]{post_existence}
+\caption{Screenshot of feasible objects output in table}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\end{description}
 
-\section{Optimize} Click the "Optimize" button\\
-\includegraphics[scale=0.3]{optimize}\\
-The Penalty, Possiblistic, and Qualitative Logic tables have been generated. The exemplification table shows which objects are prefered for each logic.\\
-\includegraphics[scale=0.3]{post_optimize}
-\newpage
+\textbf{Note:} \\
+Repetitive clicks of the existence button will always generate the same output in the table.
 
-\section{Omni-optimize} Click the "Omni-optimize" button\\
-\includegraphics[scale=0.3]{omni-optimize}\\
-The Penalty, Possiblistic, and Qualitative Logic tables have been generated. The exemplification table shows which objects are prefered for each logic.\\
-\includegraphics[scale=0.3]{post_omni-optimize}
+\section{Exemplification}
+\vspace{.75em}
+The following steps demonstrate the exemplification functionality of the program. \\
+Comparing two random feasible objects based on each of the three preference logics.\\
+
+\begin{description}[leftmargin=4em]
+\item [Step 1:] Click the \textbf{"Exemplify"} button
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{exemplify}
+\caption{Screenshot of clicking the exemplify button}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Result:] The Penalty Logic, Possiblistic Logic, and Qualitative Choice Logic tables will be populated with the necessary underlying data used for exemplification. The \textbf{exemplification table} shows which objects are preferred for based on each logic.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{post_exemplify}
+\caption{Screenshot of exemplification output in table}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\end{description}
+\textbf{Note:} \\
+Repetitive clicks of the exemplify button will compare two different random feasible objects and generate different output in the table.
+
+\section{Optimization}
+The following steps demonstrate the optimization functionality of the program. \\
+Showing a optimal feasible object based on each of the three preference logics.\\
+
+\begin{description}[leftmargin=4em]
+\item [Step 1:]  Click the \textbf{"Optimize"} button
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{optimize}
+\caption{Screenshot of clicking the optimize button}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Result:] The \textbf{Optimal Penalty Objects, Optimal Possiblistic Objects, and Optimal Qualitative Objects tables} will be populated with a single optimal object based on each logic.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{post_optimize}
+\caption{Screenshot of optimization output in tables}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\end{description}
+
+\textbf{Note:} \\
+Repetitive clicks of the optimize button will always generate the same output in the tables.
+
+\section{Omni-Optimization}
+The following steps demonstrate the omni-optimization functionality of the program. \\
+Showing all optimal feasible objects based on each of the three preference logics.\\
+
+\begin{description}[leftmargin=4em]
+\item [Step 1:]  Click the \textbf{"Omni-Optimize"} button
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{omni-optimize}
+\caption{Screenshot of clicking the omni-optimize button}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\item [Result:] The \textbf{Optimal Penalty Objects, Optimal Possiblistic Objects, and Optimal Qualitative Objects tables} will be populated with optimal objects based on each logic, along with the total number of optimal objects for each preference.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,trim=1cm 1cm 1cm 1cm]{post_omni-optimize}
+\caption{Screenshot of omni-optimization output in tables}
+\end{center}
+\end{figure}
+\vspace{-2.5em}
+\end{description}
+
+\textbf{Note:} \\
+Repetitive clicks of the omni-optimize button will always generate the same output in the tables.
 
 
 \end{document}
